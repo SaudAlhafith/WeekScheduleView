@@ -11,7 +11,7 @@ import Foundation
 ///
 /// Options include showing hours from the earliest to latest entry, only hours with entries, a full day, or a custom range.
 /// For `.custom(startHour:endHour)`, ensure `startHour` ≤ `endHour` to avoid issues.
-enum TimelineRange {
+public enum TimelineRange {
     /// From the earliest entry's start hour to the latest entry's end hour.
     case minToMaxEntryHours
     

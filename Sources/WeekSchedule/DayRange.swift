@@ -51,7 +51,7 @@ public enum Weekday: Int, CaseIterable {
         return (self.rawValue + firstWeekday) % 7
     }
     
-    enum Style {
+    public enum Style {
         case wide
         case abbreviated
         case short

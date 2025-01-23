@@ -34,40 +34,42 @@ import SwiftUI
 public struct WeekScheduleOptions {
     
     /// Determines the range of days displayed in the schedule.
-    var dayRange: DayRange = .weekdays
+    public var dayRange: DayRange = .weekdays
     
     /// Determines the range of hours displayed in the timeline.
-    var timelineRange: TimelineRange = .entriesOnly
+    public var timelineRange: TimelineRange = .entriesOnly
     
     /// Determines whether to highlight today's entries
-    var highlightToday: Bool = true
+    public var highlightToday: Bool = true
     
     /// Height of each schedule entry.
-    var entryHeight: CGFloat = 50
+    public var entryHeight: CGFloat = 50
     
     /// Height of each schedule entry when schedule expanded
-    var entryExpandedHeight: CGFloat = 70
+    public var entryExpandedHeight: CGFloat = 70
     
     /// Vertical spacing between schedule days.
-    var daySpacing: CGFloat = 8
+    public var daySpacing: CGFloat = 8
     
     /// Font used for the day
-    var dayFont: Font = .system(size: 14)
+    public var dayFont: Font = .system(size: 14)
     
     /// Day format
-    var dayStyle: Weekday.Style = .wide
+    public var dayStyle: Weekday.Style = .wide
     
     /// Timeline hour font
-    var timelineFont: Font = .caption
+    public var timelineFont: Font = .caption
     
     /// Font used for the title.
-    var titleFont: Font = .caption
+    public var titleFont: Font = .caption
     
     /// Font used for the subtitle.
-    var subtitleFont: Font = .caption2
+    public var subtitleFont: Font = .caption2
     
     /// Font used for the title.
-    var timeFont: Font = .system(size: 9)
+    public var timeFont: Font = .system(size: 9)
+    
+    public init() {}
     
 }
 
@@ -80,7 +82,7 @@ public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
     var options: WeekScheduleOptions
     var entryViewBuilder: EntryViewBuilder<EntryView, Entry>
     
-    public init(entries: [Entry], options: WeekScheduleOptions, @ViewBuilder entryViewBuilder: @escaping EntryViewBuilder<EntryView, Entry>) {
+    public init(entries: [Entry], options: WeekScheduleOptions = WeekScheduleOptions(), @ViewBuilder entryViewBuilder: @escaping EntryViewBuilder<EntryView, Entry>) {
         self.entries = entries
         self.options = options
         self.entryViewBuilder = entryViewBuilder
@@ -142,7 +144,7 @@ public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
 }
 
 extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
-    init(entries: [Entry], options: WeekScheduleOptions) {
+    public init(entries: [Entry], options: WeekScheduleOptions) {
         self.entries = entries
         self.options = options
         self.entryViewBuilder = { entry, options in

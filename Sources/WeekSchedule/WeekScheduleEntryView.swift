@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
+public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
     
     var entry: Entry
     var options: WeekScheduleOptions
     
-    var body: some View {
+    public var body: some View {
         ZStack{
             VStack {
                 Text(entry.startDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
