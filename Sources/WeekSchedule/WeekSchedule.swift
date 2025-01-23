@@ -144,7 +144,7 @@ public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
 }
 
 extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
-    public init(entries: [Entry], options: WeekScheduleOptions) {
+    public init(entries: [Entry], options: WeekScheduleOptions = WeekScheduleOptions()) {
         self.entries = entries
         self.options = options
         self.entryViewBuilder = { entry, options in
