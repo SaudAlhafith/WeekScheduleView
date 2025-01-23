@@ -151,23 +151,5 @@ extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
     }
 }
 
-//#Preview {
-//    WeekSchedule(entries: exampleEvents, options: WeekScheduleOptions())
-//        .background{
-//            RoundedRectangle(cornerRadius: 20)
-//                .fill(Color.cyan.opacity(0.04))
-//        }
-//        .padding(10)
-//        .frame(height: 300)
-//        
-//    WeekSchedule(entries: exampleEvents, options: WeekScheduleOptions()) { entry, options in
-//        VStack {
-//            Text(entry.title)
-//                .font(.caption2)
-//        }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .padding(4)
-//        .background(Color.blue.opacity(0.2))
-//        .cornerRadius(8)
-//    }
-//}
+
+

@@ -94,7 +94,7 @@ extension WeekSchedule {
     }
     
     // MARK: Entry Logic
-    // the place of the entry will be based on the index in entriesHours if certain variable is true
+    // The position of the entry will be based on the index in entriesHours if certain variable is true
     
     func getEntriesFor(day: Weekday) -> [Entry] {
         var dayEntries: [Entry] = []
