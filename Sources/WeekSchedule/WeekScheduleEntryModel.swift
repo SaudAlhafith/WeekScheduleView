@@ -51,6 +51,16 @@ public struct TimeTableEvent: WeekScheduleEntry {
     public var color: Color
     public var startComponents: DateComponents
     public var endComponents: DateComponents
+    
+    public init(id: UUID = UUID(), title: String, subtitle: String? = nil, color: Color, startComponents: DateComponents, endComponents: DateComponents) {
+        self.id = id
+        self.title = title
+        self.subtitle = subtitle
+        self.color = color
+        self.startComponents = startComponents
+        self.endComponents = endComponents
+    }
+    
 }
 
 
