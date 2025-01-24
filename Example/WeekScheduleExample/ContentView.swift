@@ -12,7 +12,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             WeekSchedule(
-                entries: [TimeTableEvent(title: "Hello", color: .red, startComponents: DateComponents(hour: 8, weekday:2), endComponents: DateComponents(hour: 9, weekday:2))]),
+                entries: [
+                    TimeTableEvent(title: "Hello", color: .red, startComponents: DateComponents(hour: 8, weekday:2), endComponents: DateComponents(hour: 9, weekday:2))
+                ]
             )
         }
         .padding()
