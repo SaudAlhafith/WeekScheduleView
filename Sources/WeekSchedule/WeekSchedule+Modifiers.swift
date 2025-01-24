@@ -31,9 +31,16 @@ extension WeekSchedule {
     }
     
     /// Sets the height of each schedule entry.
-    func entryHeight(_ height: CGFloat) -> WeekSchedule {
+    func isEntryExpanded(_ isEntryExpanded: Bool) -> WeekSchedule {
         var view = self
-        view.options.entryHeight = height
+        view.options.isEntryExpanded = isEntryExpanded
+        return view
+    }
+    
+    /// Sets the height of each schedule entry.
+    func entryNormalHeight(_ height: CGFloat) -> WeekSchedule {
+        var view = self
+        view.options.entryNormalHeight = height
         return view
     }
     
@@ -83,6 +90,13 @@ extension WeekSchedule {
     func subtitleFont(_ font: Font) -> WeekSchedule {
         var view = self
         view.options.subtitleFont = font
+        return view
+    }
+    
+    /// Sets the font for the time labels.
+    func isEntryTimeShowing(_ isEntryTimeShowing: Bool) -> WeekSchedule {
+        var view = self
+        view.options.isEntryTimeShowing = isEntryTimeShowing
         return view
     }
     

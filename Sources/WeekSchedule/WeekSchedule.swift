@@ -42,12 +42,6 @@ public struct WeekScheduleOptions {
     /// Determines whether to highlight today's entries
     public var highlightToday: Bool = true
     
-    /// Height of each schedule entry.
-    public var entryHeight: CGFloat = 50
-    
-    /// Height of each schedule entry when schedule expanded
-    public var entryExpandedHeight: CGFloat = 70
-    
     /// Vertical spacing between schedule days.
     public var daySpacing: CGFloat = 8
     
@@ -57,6 +51,20 @@ public struct WeekScheduleOptions {
     /// Day format
     public var dayStyle: Weekday.Style = .wide
     
+    /// Height of each schedule entry when schedule expanded
+    public var isEntryExpanded: Bool = true
+    
+    /// Height of each schedule entry.
+    public var entryHeight: CGFloat {
+        isEntryExpanded ? entryExpandedHeight : entryNormalHeight
+    }
+    
+    /// Height of each schedule entry.
+    public var entryNormalHeight: CGFloat = 50
+    
+    /// Height of each schedule entry when schedule expanded
+    public var entryExpandedHeight: CGFloat = 70
+        
     /// Timeline hour font
     public var timelineFont: Font = .caption
     
@@ -65,6 +73,9 @@ public struct WeekScheduleOptions {
     
     /// Font used for the subtitle.
     public var subtitleFont: Font = .caption2
+    
+    /// Font used for the title.
+    public var isEntryTimeShowing: Bool = false
     
     /// Font used for the title.
     public var timeFont: Font = .system(size: 9)
@@ -148,10 +159,54 @@ extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
         self.entries = entries
         self.options = options
         self.entryViewBuilder = { entry, options in
-            WeekScheduleEntryView(entry: entry, options: options)
+            return WeekScheduleEntryView(entry: entry, options: options)
         }
     }
 }
 
-
-
+#Preview {
+    WeekSchedule(entries: [
+        TimeTableEvent(
+            title: "المترجمات",
+            subtitle: "2157",
+            color: .green,
+            startComponents: DateComponents(hour: 8, minute: 25),
+            endComponents: DateComponents(hour: 9, minute: 15)
+        ),
+        TimeTableEvent(
+            title: "المترجمات",
+            subtitle: "2157",
+            color: .green,
+            startComponents: DateComponents(hour: 9, minute: 20),
+            endComponents: DateComponents(hour: 10, minute: 10)
+        ),
+        TimeTableEvent(
+            title: "أمن المعلومات",
+            subtitle: "3040",
+            color: .red,
+            startComponents: DateComponents(hour: 10, minute: 15),
+            endComponents: DateComponents(hour: 11, minute: 5)
+        ),
+        TimeTableEvent(
+            title: "أمن المعلومات",
+            subtitle: "3040",
+            color: .red,
+            startComponents: DateComponents(hour: 11, minute: 10),
+            endComponents: DateComponents(hour: 12, minute: 0)
+        ),
+        TimeTableEvent(
+            title: "مبادئ قواعد البيانات",
+            subtitle: "2029",
+            color: .blue,
+            startComponents: DateComponents(hour: 13, minute: 25),
+            endComponents: DateComponents(hour: 14, minute: 15)
+        ),
+        TimeTableEvent(
+            title: "مبادئ قواعد البيانات",
+            subtitle: "2029",
+            color: .blue,
+            startComponents: DateComponents(hour: 14, minute: 20),
+            endComponents: DateComponents(hour: 15, minute: 10)
+        )
+    ], options: WeekScheduleOptions())
+}

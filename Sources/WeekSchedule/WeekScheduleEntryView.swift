@@ -9,19 +9,28 @@ import SwiftUI
 
 public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
     
-    var entry: Entry
-    var options: WeekScheduleOptions
+    public var entry: Entry
+    public var options: WeekScheduleOptions
+    public var entryHeight: CGFloat
+    
+    public init(entry: Entry, options: WeekScheduleOptions) {
+        self.entry = entry
+        self.options = options
+        self.entryHeight = entry.entryHeight(entryHeight: options.entryHeight)
+    }
     
     public var body: some View {
         ZStack{
-            VStack {
-                Text(entry.startDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
-                    .font(options.timeFont)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Spacer()
-                Text(entry.endDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
-                    .font(options.timeFont)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+            if options.isEntryTimeShowing {
+                VStack {
+                    Text(entry.startDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
+                        .font(options.timeFont)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Spacer()
+                    Text(entry.endDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
+                        .font(options.timeFont)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
             }
             VStack {
                 Text(entry.title)
@@ -34,7 +43,7 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
         }
         .padding(2)
         .multilineTextAlignment(.center)
-        .frame(height: entry.entryHeight(entryHeight: options.entryHeight))
+        .frame(height: entryHeight)
         .frame(maxWidth: .infinity)
         .background(entry.color.opacity(0.3))
         .cornerRadius(5)

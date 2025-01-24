@@ -27,8 +27,8 @@ public extension WeekScheduleEntry {
     var endDate: Date {
         endComponents.dateForWeek(weekStart: Date.startOfCurrentWeek)
     }
-    var startDay: Weekday { Weekday(rawValue: startDate.weekday - 2) ?? .none }
-    var endDay: Weekday { Weekday(rawValue: endDate.weekday - 2) ?? .none }
+    var startDay: Weekday { Weekday(rawValue: startDate.weekday - 1) ?? .none }
+    var endDay: Weekday { Weekday(rawValue: endDate.weekday - 1) ?? .none }
     var startHour: Int { startDate.hour }
     var startMinute: Int { startDate.minute }
     var endHour: Int { endDate.hour }
@@ -62,5 +62,3 @@ public struct TimeTableEvent: WeekScheduleEntry {
     }
     
 }
-
-
