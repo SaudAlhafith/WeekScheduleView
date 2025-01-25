@@ -66,7 +66,7 @@ public enum Weekday: Int, CaseIterable {
         case .wide:
             return name
         case .abbreviated:
-            return String(name.prefix(1)) // "Tuesday" -> "T"
+            return String(name.prefix(3)) // "Tuesday" -> "Tue"
         case .short:
             return String(name.prefix(2)) // "Tuesday" -> "Tu"
         }
