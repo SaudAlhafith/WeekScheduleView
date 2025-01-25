@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Calendar {
+public extension Calendar {
     
     var weekendDays: Set<Weekday> {
         var weekendDays = Set<Weekday>()

@@ -52,7 +52,7 @@ public struct WeekScheduleOptions {
     public var dayStyle: Weekday.Style = .wide
     
     /// Height of each schedule entry when schedule expanded
-    public var isEntryExpanded: Bool = true
+    public var isEntryExpanded: Bool = false
     
     /// Height of each schedule entry.
     public var entryHeight: CGFloat {

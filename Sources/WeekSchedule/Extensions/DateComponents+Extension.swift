@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DateComponents {
+public extension DateComponents {
     
     func dateForWeek(weekStart: Date = Date.startOfCurrentWeek) -> Date {
         return Calendar.current.date(byAdding: self, to: weekStart) ?? weekStart

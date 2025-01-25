@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension WeekSchedule {
+public extension WeekSchedule {
     
     /// Sets the range of days displayed in the schedule.
     func dayRange(_ dayRange: DayRange = .weekdays) -> WeekSchedule {

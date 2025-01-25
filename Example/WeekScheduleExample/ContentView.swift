@@ -10,14 +10,10 @@ import WeekSchedule
 
 struct ContentView: View {
     
-    
-    
     var body: some View {
         VStack {
-            WeekSchedule(
-                entries: example) { entry, options in
-                    Text(entry.title)
-                }
+            WeekSchedule(entries: example)
+                .isEntryExpanded(false)
         }
     }
 }

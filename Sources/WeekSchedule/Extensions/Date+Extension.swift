@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Date {
+public extension Date {
     
     static var startOfCurrentWeek: Date {
         let calendar = Calendar.current
