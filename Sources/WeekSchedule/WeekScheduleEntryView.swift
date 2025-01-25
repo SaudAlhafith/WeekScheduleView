@@ -20,17 +20,12 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
     }
     
     public var body: some View {
-        ZStack{
+        VStack(spacing: 0){
             if options.isEntryTimeShowing {
-                VStack {
-                    Text(entry.startDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
-                        .font(options.timeFont)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Spacer()
-                    Text(entry.endDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
-                        .font(options.timeFont)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
+                Text(entry.startDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
+                    .font(options.timeFont)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
             }
             VStack {
                 Text(entry.title)
@@ -39,6 +34,12 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
                     Text(subtitle)
                         .font(options.subtitleFont)
                 }
+            }
+            .frame(maxHeight: .infinity)
+            if options.isEntryTimeShowing {
+                Text(entry.endDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
+                    .font(options.timeFont)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
         .padding(2)
@@ -51,7 +52,7 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(entry.color, lineWidth: 2)
         )
-
+        
         
         
     }

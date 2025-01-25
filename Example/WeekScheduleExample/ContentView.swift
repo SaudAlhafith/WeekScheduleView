@@ -17,7 +17,7 @@ struct ContentView: View {
         VStack {
             WeekSchedule(entries: example)
                 .dayRange(dayRange)
-                .dayStyle(.wide)
+                .dayStyle(.abbreviated)
                 .isEntryExpanded(isExpanded)
                 .frame(height: 300)
             Button("Expand Schedule") {
