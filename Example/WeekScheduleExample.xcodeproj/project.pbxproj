@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DF8013A32D4991E3000B9029 /* WeekSchedule in Frameworks */ = {isa = PBXBuildFile; productRef = DF8013A22D4991E3000B9029 /* WeekSchedule */; };
+		DF7365682D4D27530032C624 /* WeekSchedule in Frameworks */ = {isa = PBXBuildFile; productRef = DF7365672D4D27530032C624 /* WeekSchedule */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF8013A32D4991E3000B9029 /* WeekSchedule in Frameworks */,
+				DF7365682D4D27530032C624 /* WeekSchedule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,7 +70,7 @@
 			);
 			name = WeekScheduleExample;
 			packageProductDependencies = (
-				DF8013A22D4991E3000B9029 /* WeekSchedule */,
+				DF7365672D4D27530032C624 /* WeekSchedule */,
 			);
 			productName = WeekScheduleExample;
 			productReference = DFB819902D42FB23005482B8 /* WeekScheduleExample.app */;
@@ -101,7 +101,7 @@
 			mainGroup = DFB819872D42FB23005482B8;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				DF8013A12D4991E3000B9029 /* XCRemoteSwiftPackageReference "WeekScheduleView" */,
+				DF7365662D4D27530032C624 /* XCRemoteSwiftPackageReference "WeekScheduleView" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DFB819912D42FB23005482B8 /* Products */;
@@ -337,20 +337,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DF8013A12D4991E3000B9029 /* XCRemoteSwiftPackageReference "WeekScheduleView" */ = {
+		DF7365662D4D27530032C624 /* XCRemoteSwiftPackageReference "WeekScheduleView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SaudAlhafith/WeekScheduleView";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DF8013A22D4991E3000B9029 /* WeekSchedule */ = {
+		DF7365672D4D27530032C624 /* WeekSchedule */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DF8013A12D4991E3000B9029 /* XCRemoteSwiftPackageReference "WeekScheduleView" */;
+			package = DF7365662D4D27530032C624 /* XCRemoteSwiftPackageReference "WeekScheduleView" */;
 			productName = WeekSchedule;
 		};
 /* End XCSwiftPackageProductDependency section */

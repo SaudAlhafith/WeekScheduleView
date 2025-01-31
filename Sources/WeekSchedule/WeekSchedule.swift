@@ -145,7 +145,8 @@ public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
                 ZStack(alignment: .top){
                     ForEach(getEntriesFor(day: day)) { entry in
                         entryViewBuilder(entry, options)
-                            .frame(height: entry.entryHeight(entryHeight: options.entryHeight), alignment: .top)
+                            .frame(maxHeight: entry.entryHeight(entryHeight: options.entryHeight), alignment: .top)
+                            .clipped()
                             .offset(y: entryYPosition(entry))
                     }
                 }
@@ -250,5 +251,23 @@ extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
             startComponents: DateComponents(hour: 14, minute: 20, weekday: 3),
             endComponents: DateComponents(hour: 15, minute: 10, weekday: 3)
         )
-    ], options: WeekScheduleOptions())
+    ], options: WeekScheduleOptions()){ entry, options in
+        VStack(alignment: .leading) {
+            Text(entry.title)
+                .font(options.titleFont)
+            if let subtitle = entry.subtitle{
+                Text(subtitle)
+                    .font(options.subtitleFont)
+            }
+            HStack {
+                Text(entry.startDate.formatted(.dateTime.hour().minute()))
+                Spacer()
+                Text(entry.endDate.formatted(.dateTime.hour().minute()))
+            }
+            .font(.system(size: 8))
+        }
+        .padding(10)
+        .background(Color.blue.opacity(0.2))
+        .cornerRadius(8)
+    }
 }

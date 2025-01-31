@@ -4,10 +4,10 @@
     {
       "identity" : "weekscheduleview",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SaudAlhafith/WeekScheduleView.git",
+      "location" : "https://github.com/SaudAlhafith/WeekScheduleView",
       "state" : {
-        "revision" : "bf491a5d9243248d35ea299dddb67ef333dc9cab",
-        "version" : "0.1.0"
+        "branch" : "main",
+        "revision" : "8dc6baa497ec463eb88441964c2253998d7795c4"
       }
     }
   ],

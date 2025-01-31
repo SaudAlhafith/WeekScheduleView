@@ -24,7 +24,7 @@ extension WorkoutSession: WeekScheduleEntry {
     }
     
     var subtitle: String? {
-        return coach != nil ? "Coach: \(coach!)" : nil
+        return coach
     }
     
     var color: Color {
@@ -37,11 +37,11 @@ extension WorkoutSession: WeekScheduleEntry {
     }
     
     var startComponents: DateComponents {
-        return Calendar.current.dateComponents([.hour, .minute], from: sessionStart)
+        return Calendar.current.dateComponents([.hour, .minute, .weekday], from: sessionStart)
     }
     
     var endComponents: DateComponents {
-        return Calendar.current.dateComponents([.hour, .minute], from: sessionEnd)
+        return Calendar.current.dateComponents([.hour, .minute, .weekday], from: sessionEnd)
     }
     
     var id: ObjectIdentifier {
@@ -53,18 +53,27 @@ extension WorkoutSession: WeekScheduleEntry {
 struct WorkoutScheduleView: View {
     var sessions: [WorkoutSession] = [
         WorkoutSession(exerciseName: "Yoga", coach: "Alice", sessionStart: Date(), sessionEnd: Date().addingTimeInterval(3600), intensityLevel: 1),
-        WorkoutSession(exerciseName: "HIIT", coach: "Bob", sessionStart: Date().addingTimeInterval(7200), sessionEnd: Date().addingTimeInterval(9000), intensityLevel: 3)
+        WorkoutSession(exerciseName: "HIIT", coach: "Bob", sessionStart: Date().addingTimeInterval(7200), sessionEnd: Date().addingTimeInterval(9000), intensityLevel: 3),
+        WorkoutSession(exerciseName: "Yoga", coach: "Alice", sessionStart: Date(), sessionEnd: Date().addingTimeInterval(3600 + 86400), intensityLevel: 1),
     ]
 
     var body: some View {
-        WeekSchedule(entries: entries) { entry, options in
+        WeekSchedule(entries: sessions) { entry, options in
             VStack(alignment: .leading) {
                 Text(entry.title)
                     .font(options.titleFont)
-                Text(entry.subtitle)
-                    .font(options.subtitleFont)
+                if let subtitle = entry.subtitle{
+                    Text(subtitle)
+                        .font(options.subtitleFont)
+                }
+                HStack {
+                    Text(entry.startDate.formatted(.dateTime.hour().minute()))
+                    Spacer()
+                    Text(entry.endDate.formatted(.dateTime.hour().minute()))
+                }
+                .font(.system(size: 8))
             }
-            .padding()
+            .padding(2)
             .background(Color.blue.opacity(0.2))
             .cornerRadius(8)
         }
@@ -75,5 +84,5 @@ struct WorkoutScheduleView: View {
 }
 
 #Preview {
-    CustomEntryExample()
+    WorkoutScheduleView()
 }
