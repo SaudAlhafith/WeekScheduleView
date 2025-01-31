@@ -8,8 +8,11 @@
 import SwiftUI
 import WeekSchedule
 
+let sundayDate = Calendar.current.nextDate(after: .now, matching: DateComponents(weekday: 1), matchingPolicy: .nextTime) ?? .now
+
 // Your actual data model
-struct WorkoutSession {
+struct WorkoutSession: Identifiable {
+    var id: UUID = UUID()
     var exerciseName: String
     var coach: String?
     var sessionStart: Date
@@ -43,43 +46,101 @@ extension WorkoutSession: WeekScheduleEntry {
     var endComponents: DateComponents {
         return Calendar.current.dateComponents([.hour, .minute, .weekday], from: sessionEnd)
     }
-    
-    var id: ObjectIdentifier {
-        return ObjectIdentifier(self as AnyObject)
-    }
 }
 
 // Example View
+import SwiftUI
+import WeekSchedule
+
 struct WorkoutScheduleView: View {
+    
     var sessions: [WorkoutSession] = [
-        WorkoutSession(exerciseName: "Yoga", coach: "Alice", sessionStart: Date(), sessionEnd: Date().addingTimeInterval(3600), intensityLevel: 1),
-        WorkoutSession(exerciseName: "HIIT", coach: "Bob", sessionStart: Date().addingTimeInterval(7200), sessionEnd: Date().addingTimeInterval(9000), intensityLevel: 3),
-        WorkoutSession(exerciseName: "Yoga", coach: "Alice", sessionStart: Date(), sessionEnd: Date().addingTimeInterval(3600 + 86400), intensityLevel: 1),
+        WorkoutSession(
+            exerciseName: "Yoga",
+            coach: "Alice",
+            sessionStart: sundayDate,
+            sessionEnd: sundayDate.addingTimeInterval(80 * 60),
+            intensityLevel: 1
+        ),
+        WorkoutSession(
+            exerciseName: "HIIT",
+            coach: "Bob",
+            sessionStart: sundayDate.addingTimeInterval(7200), // +2 hours from start of day
+            sessionEnd: sundayDate.addingTimeInterval(7200 + 80 * 60),
+            intensityLevel: 3
+        ),
+        WorkoutSession(
+            exerciseName: "Strength Training",
+            coach: "Charlie",
+            sessionStart: sundayDate.addingTimeInterval(14400), // +4 hours from start of day
+            sessionEnd: sundayDate.addingTimeInterval(14400 + 80 * 60),
+            intensityLevel: 2
+        ),
+        WorkoutSession(
+            exerciseName: "Yoga",
+            coach: "Alice",
+            sessionStart: sundayDate.addingTimeInterval(86400), // Next day
+            sessionEnd: sundayDate.addingTimeInterval(86400 + 80 * 60),
+            intensityLevel: 1
+        ),
+        WorkoutSession(
+            exerciseName: "HIIT",
+            coach: "Bob",
+            sessionStart: sundayDate.addingTimeInterval(7200 + 86400), // +2 hours on Monday
+            sessionEnd: sundayDate.addingTimeInterval(7200 + 86400 + 80 * 60),
+            intensityLevel: 3
+        ),
+        WorkoutSession(
+            exerciseName: "Strength Training",
+            coach: "Charlie",
+            sessionStart: sundayDate.addingTimeInterval(14400 + 86400), // +4 hours on Monday
+            sessionEnd: sundayDate.addingTimeInterval(14400 + 86400 + 80 * 60),
+            intensityLevel: 2
+        ),
     ]
 
+
     var body: some View {
-        WeekSchedule(entries: sessions) { entry, options in
-            VStack(alignment: .leading) {
-                Text(entry.title)
-                    .font(options.titleFont)
-                if let subtitle = entry.subtitle{
-                    Text(subtitle)
-                        .font(options.subtitleFont)
+        VStack {
+            WeekSchedule(entries: sessions) { entry, options in
+                VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(entry.title)
+                            .font(.caption)
+                            .bold()
+                        if let subtitle = entry.subtitle {
+                            Text(subtitle)
+                                .font(.caption2)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    VStack {
+                        Text(entry.startDate.formatted(.dateTime.hour().minute()))
+                            .bold()
+                        Text(entry.endDate.formatted(.dateTime.hour().minute()))
+                            .bold()
+                    }
+                    .font(.system(size: 8))
+                    .padding(.top, 2)
+
                 }
-                HStack {
-                    Text(entry.startDate.formatted(.dateTime.hour().minute()))
-                    Spacer()
-                    Text(entry.endDate.formatted(.dateTime.hour().minute()))
-                }
-                .font(.system(size: 8))
+                .padding(4)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(entry.color, lineWidth: 3)
+                )
+                .background(entry.color.opacity(0.3))
+                .cornerRadius(10)
             }
-            .padding(2)
-            .background(Color.blue.opacity(0.2))
-            .cornerRadius(8)
+            .dayRange(.custom(days: [.monday, .tuesday, .wednesday]))
+            .timelineRange(.entriesOnly)
+            .highlightToday(true)
+            .background(Color.gray.opacity(0.1), in: .rect(cornerRadius: 20))
+            .frame(height: UIScreen.main.bounds.height
+                   * 0.4)
+            Spacer()
         }
-        .dayRange(.weekdays)
-        .timelineRange(.entriesOnly)
-        .highlightToday(true)
     }
 }
 
