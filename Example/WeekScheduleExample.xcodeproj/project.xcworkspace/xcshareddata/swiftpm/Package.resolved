@@ -1,0 +1,15 @@
+{
+  "originHash" : "0e7190a5d52fe3457a0c16b2e9fd7572abc280f8bda19a3008660009b5f5c4e1",
+  "pins" : [
+    {
+      "identity" : "weekscheduleview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SaudAlhafith/WeekScheduleView.git",
+      "state" : {
+        "revision" : "bf491a5d9243248d35ea299dddb67ef333dc9cab",
+        "version" : "0.1.0"
+      }
+    }
+  ],
+  "version" : 3
+}

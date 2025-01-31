@@ -10,11 +10,11 @@ import SwiftUI
 
 // MARK: - Protocol
 public protocol WeekScheduleEntry: Identifiable {
-    var title: String { get set }
-    var subtitle: String? { get set }
-    var color: Color { get set }
-    var startComponents: DateComponents { get set }
-    var endComponents: DateComponents { get set }
+    var title: String { get }
+    var subtitle: String? { get }
+    var color: Color { get }
+    var startComponents: DateComponents { get }
+    var endComponents: DateComponents { get }
 }
 
 // MARK: - Default Implementation

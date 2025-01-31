@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DF8013A32D4991E3000B9029 /* WeekSchedule in Frameworks */ = {isa = PBXBuildFile; productRef = DF8013A22D4991E3000B9029 /* WeekSchedule */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		DFB819902D42FB23005482B8 /* WeekScheduleExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeekScheduleExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF8013A32D4991E3000B9029 /* WeekSchedule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = WeekScheduleExample;
 			packageProductDependencies = (
+				DF8013A22D4991E3000B9029 /* WeekSchedule */,
 			);
 			productName = WeekScheduleExample;
 			productReference = DFB819902D42FB23005482B8 /* WeekScheduleExample.app */;
@@ -95,6 +101,7 @@
 			mainGroup = DFB819872D42FB23005482B8;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				DF8013A12D4991E3000B9029 /* XCRemoteSwiftPackageReference "WeekScheduleView" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DFB819912D42FB23005482B8 /* Products */;
@@ -328,6 +335,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DF8013A12D4991E3000B9029 /* XCRemoteSwiftPackageReference "WeekScheduleView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SaudAlhafith/WeekScheduleView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DF8013A22D4991E3000B9029 /* WeekSchedule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF8013A12D4991E3000B9029 /* XCRemoteSwiftPackageReference "WeekScheduleView" */;
+			productName = WeekSchedule;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DFB819882D42FB23005482B8 /* Project object */;
 }
