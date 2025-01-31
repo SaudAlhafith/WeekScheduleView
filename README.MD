@@ -61,7 +61,7 @@ Or add it directly in Xcode:
 
 Here's how to create a simple workout schedule:
 
-![Workout Schedule View](https://github.com/SaudAlhafith/WeekScheduleView/blob/main/Assets/WorkoutScheduleView.png?raw=true)
+<img src="Assets/WorkoutScheduleView.png" width="300" alt="Workout Schedule View.">
 
 
 ```swift
