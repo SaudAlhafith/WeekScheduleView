@@ -1,16 +1,15 @@
 # WeekSchedule
 
-[![Latest release](https://img.shields.io/github/v/release/yourusername/WeekSchedule?color=brightgreen&label=version)](https://github.com/yourusername/WeekSchedule/releases/latest)
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fyourusername%2FWeekSchedule%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/yourusername/WeekSchedule)
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fyourusername%2FWeekSchedule%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/yourusername/WeekSchedule)
+[![Latest release](https://img.shields.io/github/v/release/SaudAlhafith/WeekScheduleView?color=brightgreen&label=version)](https://github.com/SaudAlhafith/WeekScheduleView/releases/latest)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSaudAlhafith%2FWeekScheduleView%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/SaudAlhafith/WeekScheduleView)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSaudAlhafith%2FWeekScheduleView%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/SaudAlhafith/WeekScheduleView)
 [![](https://img.shields.io/badge/SPM-supported-DE5C43.svg?color=brightgreen)](https://swift.org/package-manager/)
-![](https://img.shields.io/github/license/yourusername/WeekSchedule)
+![](https://img.shields.io/github/license/2FSaudAlhafith/WeekScheduleView)
 
-[![contact: @yourusername](https://img.shields.io/badge/contact-%40yourusername-blue.svg?style=flat)](https://t.me/yourusername)
-[![Telegram Group](https://img.shields.io/endpoint?color=neon&style=flat-square&url=https%3A%2F%2Ftg.sumanjay.workers.dev%2Fswiftui_dev)](https://telegram.dog/swiftui_dev)
+[![contact: @SaudAlhafith](https://img.shields.io/badge/contact-%40SaudAlhafith-blue.svg?style=flat)](https://t.me/SaudAlhafith)
 
 <p align="left">
-<img src="Sources/Gifs/teaser.jpg" alt="WeekSchedule" width="600">
+<img src="Sources/Gifs/teaser.jpg" alt="WeekScheduleView" width="600">
 </p>
 
 **WeekSchedule** is a SwiftUI package designed to help you easily create and manage weekly schedules in your iOS and macOS applications. Whether you're building a calendar app, a task scheduler, or a time management tool, `WeekSchedule` provides a flexible and customizable way to display and interact with weekly timelines.
@@ -44,14 +43,14 @@ To integrate `WeekSchedule` into your project using SwiftPM, add the following t
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yourusername/WeekSchedule", from: "0.1.0"),
+    .package(url: "https://github.com/SaudAlhafith/WeekScheduleView", from: "0.1.0"),
 ],
 ```
 
 Or add it directly in Xcode:
 
 1. Go to `File` > `Add Packages...`.
-2. Enter the repository URL: `https://github.com/yourusername/WeekSchedule`.
+2. Enter the repository URL: `https://github.com/SaudAlhafith/WeekScheduleView`.
 3. Select the version you want to use.
 
 ---
