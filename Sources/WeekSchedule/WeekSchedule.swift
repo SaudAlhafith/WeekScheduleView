@@ -69,16 +69,7 @@ public struct WeekScheduleOptions {
     public var timelineFont: Font = .caption
     
     /// Font used for the title.
-    public var titleFont: Font = .caption
-    
-    /// Font used for the subtitle.
-    public var subtitleFont: Font = .caption2
-    
-    /// Font used for the title.
     public var isEntryTimeShowing: Bool = false
-    
-    /// Font used for the title.
-    public var timeFont: Font = .system(size: 9)
     
     public init() {}
     
@@ -146,7 +137,6 @@ public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
                     ForEach(getEntriesFor(day: day)) { entry in
                         entryViewBuilder(entry, options)
                             .frame(maxHeight: entry.entryHeight(entryHeight: options.entryHeight), alignment: .top)
-                            .clipped()
                             .offset(y: entryYPosition(entry))
                     }
                 }
@@ -251,23 +241,5 @@ extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
             startComponents: DateComponents(hour: 14, minute: 20, weekday: 3),
             endComponents: DateComponents(hour: 15, minute: 10, weekday: 3)
         )
-    ], options: WeekScheduleOptions()){ entry, options in
-        VStack(alignment: .leading) {
-            Text(entry.title)
-                .font(options.titleFont)
-            if let subtitle = entry.subtitle{
-                Text(subtitle)
-                    .font(options.subtitleFont)
-            }
-            HStack {
-                Text(entry.startDate.formatted(.dateTime.hour().minute()))
-                Spacer()
-                Text(entry.endDate.formatted(.dateTime.hour().minute()))
-            }
-            .font(.system(size: 8))
-        }
-        .padding(10)
-        .background(Color.blue.opacity(0.2))
-        .cornerRadius(8)
-    }
+    ], options: WeekScheduleOptions())
 }

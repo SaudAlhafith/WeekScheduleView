@@ -79,31 +79,10 @@ public extension WeekSchedule {
         return view
     }
     
-    /// Sets the font for the title labels.
-    func titleFont(_ font: Font) -> WeekSchedule {
-        var view = self
-        view.options.titleFont = font
-        return view
-    }
-    
-    /// Sets the font for the subtitle labels.
-    func subtitleFont(_ font: Font) -> WeekSchedule {
-        var view = self
-        view.options.subtitleFont = font
-        return view
-    }
-    
     /// Sets the font for the time labels.
     func isEntryTimeShowing(_ isEntryTimeShowing: Bool) -> WeekSchedule {
         var view = self
         view.options.isEntryTimeShowing = isEntryTimeShowing
-        return view
-    }
-    
-    /// Sets the font for the time labels.
-    func timeFont(_ font: Font) -> WeekSchedule {
-        var view = self
-        view.options.timeFont = font
         return view
     }
 }

@@ -16,30 +16,14 @@ struct ContentView: View {
     var body: some View {
         VStack {
             WeekSchedule(entries: example)
-                .dayRange(dayRange)
-                .dayStyle(.abbreviated)
-                .isEntryExpanded(isExpanded)
-                .frame(height: 300)
-            Button("Expand Schedule") {
-                withAnimation(.snappy) {
-                    isExpanded.toggle()
-                }
-            }
-            Button("Change Day Range To All Days") {
-                withAnimation(.snappy) {
-                    dayRange = .allDays
-                }
-            }
-            Button("Change Day Range To Weekdays") {
-                withAnimation(.snappy) {
-                    dayRange = .weekdays
-                }
-            }
-            Button("Change Day Range To Custom Range") {
-                withAnimation(.snappy) {
-                    dayRange = .custom(days: [.monday, .wednesday])
-                }
-            }
+                .dayRange(.weekdays) // Show full week
+                .timelineRange(.entriesOnly) // Show 24-hour timeline
+                .highlightToday(false) // Disable today's highlight
+                .entryNormalHeight(50) // Set normal entry height
+                .entryExpandedHeight(80) // Set expanded entry height
+                .daySpacing(10) // Add spacing between days
+                .isEntryTimeShowing(true) // Show entry times
+                .isEntryExpanded(true)
         }
     }
 }
