@@ -65,6 +65,13 @@ public extension WeekSchedule {
         return view
     }
     
+    /// Sets the font used for the day labels.
+    func currentDayFont(_ font: Font) -> WeekSchedule {
+        var view = self
+        view.options.currentDayFont = font
+        return view
+    }
+    
     /// Sets the day style format.
     func dayStyle(_ style: Weekday.Style) -> WeekSchedule {
         var view = self
@@ -76,6 +83,13 @@ public extension WeekSchedule {
     func timelineFont(_ font: Font) -> WeekSchedule {
         var view = self
         view.options.timelineFont = font
+        return view
+    }
+    
+    /// Sets the font for the timeline hour labels.
+    func timelineColor(_ color: Color) -> WeekSchedule {
+        var view = self
+        view.options.timelineColor = color
         return view
     }
     

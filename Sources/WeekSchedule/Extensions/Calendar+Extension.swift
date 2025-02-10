@@ -14,7 +14,7 @@ public extension Calendar {
         
         for weekday in Weekday.allCases {
             var components = DateComponents()
-            components.weekday = weekday.rawValue + 1 // Adjust for Calendar's 1-based index.
+            components.weekday = weekday.rawValue // Adjust for Calendar's 1-based index.
             
             if let date = self.date(from: components), isDateInWeekend(date) {
                 weekendDays.insert(weekday)

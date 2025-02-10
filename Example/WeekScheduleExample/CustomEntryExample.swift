@@ -102,7 +102,7 @@ struct WorkoutScheduleView: View {
 
     var body: some View {
         VStack {
-            WeekSchedule(entries: sessions) { entry, options in
+            WeekSchedule(entries: sessions) { entry, day, options in
                 VStack(alignment: .leading, spacing: 4) {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(entry.title)

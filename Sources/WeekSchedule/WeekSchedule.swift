@@ -1,25 +1,25 @@
 /*
-
+ 
  WeekSchedule.swift
  WeekSchedule
-
+ 
  Created by saudAlhafith on 6/1/2025.
  Copyright © 2025 saudAlhafith. All rights reserved.
-
+ 
  MIT License
-
+ 
  Copyright 2025 saudAlhafith
-
+ 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
-
+ 
  The above copyright notice and this permission notice shall be included in all
  copies or substantial portions of the Software.
-
+ 
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -43,10 +43,13 @@ public struct WeekScheduleOptions {
     public var highlightToday: Bool = true
     
     /// Vertical spacing between schedule days.
-    public var daySpacing: CGFloat = 8
+    public var daySpacing: CGFloat = 4
     
     /// Font used for the day
-    public var dayFont: Font = .system(size: 14)
+    public var dayFont: Font = .system(size: 10)
+    
+    /// Font used for the current day
+    public var currentDayFont: Font = .system(size: 12, weight: .bold)
     
     /// Day format
     public var dayStyle: Weekday.Style = .wide
@@ -64,9 +67,12 @@ public struct WeekScheduleOptions {
     
     /// Height of each schedule entry when schedule expanded
     public var entryExpandedHeight: CGFloat = 70
-        
+    
     /// Timeline hour font
-    public var timelineFont: Font = .caption
+    public var timelineFont: Font = .system(size: 8)
+    
+    /// Timeline hour color
+    public var timelineColor: Color = .gray
     
     /// Font used for the title.
     public var isEntryTimeShowing: Bool = false
@@ -75,7 +81,7 @@ public struct WeekScheduleOptions {
     
 }
 
-public typealias EntryViewBuilder<EntryView: View, Entry: WeekScheduleEntry> = (_ entry: Entry, _ options: WeekScheduleOptions) -> EntryView
+public typealias EntryViewBuilder<EntryView: View, Entry: WeekScheduleEntry> = (_ entry: Entry, _ day: Weekday, _ options: WeekScheduleOptions) -> EntryView
 
 public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
     @Environment(\.layoutDirection) private var layoutDirection
@@ -95,38 +101,23 @@ public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
             HStack(alignment: .top) {
                 timeline
                     .padding(.top, 14)
-                if !options.dayRange.resolvedDays().isEmpty {
-                    HStack(alignment: .top, spacing: options.daySpacing){
-                        ForEach(options.dayRange.resolvedDays(), id: \.rawValue) { day in
-                            dayColumn(day)
-                        }
-                    }
-                    .background(alignment: .top) {
-                        VStack(spacing: 0){
-                            ForEach(dayHoursInt, id: \.hashValue) { inf in
-                                Rectangle()
-                                    .fill(.gray)
-                                    .frame(height: 1, alignment: .top)
-                                    .frame(height: options.entryHeight, alignment: .top)
-                            }
-                        }
-                        .padding(.top, 20)
+                HStack(alignment: .top, spacing: options.daySpacing){
+                    ForEach(options.dayRange.resolvedDays(), id: \.rawValue) { day in
+                        dayColumn(day)
                     }
                 }
-                // I guess I will make it up to the developer from outside
-//                else {
-//                    VStack(spacing: 10){
-//                        Spacer()
-//                        Image(systemName: "exclamationmark.triangle.fill")
-//                            .foregroundStyle(.gray)
-//                            .font(.title)
-//                        Text("No days provided.")
-//                            .foregroundStyle(.gray)
-//                            .font(.footnote)
-//                        Spacer()
-//                    }
-//                        .frame(maxWidth: .infinity)
-//                }
+                .background(alignment: .top) {
+                    VStack(spacing: 0){
+                        ForEach(dayHoursInt, id: \.hashValue) { inf in
+                            Rectangle()
+                                .fill(.gray)
+                                .frame(height: 1, alignment: .top)
+                                .frame(height: options.entryHeight, alignment: .top)
+                        }
+                    }
+                    .padding(.top, 20)
+                }
+                
                 
             }
             .padding(.horizontal, 4)
@@ -139,26 +130,28 @@ public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
             ForEach(dayHoursDate, id: \.hashValue) { hour in
                 Text(hour.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated))))
                     .font(options.timelineFont)
+                    .foregroundColor(options.timelineColor)
                     .frame(height: options.entryHeight, alignment: .top)
             }
         }
     }
     
     @ViewBuilder func dayColumn(_ day: Weekday) -> some View {
-            VStack(spacing: 0) {
-                Text(day.name(style: options.dayStyle))
-                    .font(options.dayFont)
-                    .lineLimit(1)
-                    .frame(height: 20, alignment: .top)
-                ZStack(alignment: .top){
-                    ForEach(getEntriesFor(day: day)) { entry in
-                        entryViewBuilder(entry, options)
-                            .frame(maxHeight: entry.entryHeight(entryHeight: options.entryHeight), alignment: .top)
-                            .offset(y: entryYPosition(entry))
-                    }
+        VStack(spacing: 0) {
+            Text(day.name(style: options.dayStyle))
+                .font(day.isToday ? options.currentDayFont : options.dayFont)
+                .foregroundColor(day.isToday ? .primary : .gray)
+                .lineLimit(1)
+                .frame(height: 20, alignment: .top)
+            ZStack(alignment: .top){
+                ForEach(getEntriesFor(day: day)) { entry in
+                    entryViewBuilder(entry, day, options)
+                        .frame(maxHeight: entry.entryHeight(entryHeight: options.entryHeight), alignment: .top)
+                        .offset(y: entryYPosition(entry))
                 }
             }
-            .frame(maxWidth: .infinity)
+        }
+        .frame(maxWidth: .infinity)
     }
 }
 
@@ -166,8 +159,8 @@ extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
     public init(entries: [Entry], options: WeekScheduleOptions = WeekScheduleOptions()) {
         self.entries = entries
         self.options = options
-        self.entryViewBuilder = { entry, options in
-            return WeekScheduleEntryView(entry: entry, options: options)
+        self.entryViewBuilder = { entry, day, options in
+            return WeekScheduleEntryView(entry: entry, day: day, options: options)
         }
     }
 }
@@ -220,8 +213,8 @@ extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
             title: "المترجمات",
             subtitle: "2157",
             color: .green,
-            startComponents: DateComponents(hour: 8, minute: 25, weekday: 3),
-            endComponents: DateComponents(hour: 9, minute: 15, weekday: 3)
+            startComponents: DateComponents(hour: 8, minute: 25, weekday: 2),
+            endComponents: DateComponents(hour: 9, minute: 15, weekday: 2)
         ),
         TimeTableEvent(
             title: "المترجمات",
@@ -245,7 +238,7 @@ extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
             endComponents: DateComponents(hour: 12, minute: 0, weekday: 3)
         ),
         TimeTableEvent(
-            title: "مبادئ قواعد البيانات",
+            title: "مبادئ قواعد البيانات" ,
             subtitle: "2029",
             color: .blue,
             startComponents: DateComponents(hour: 13, minute: 25, weekday: 3),

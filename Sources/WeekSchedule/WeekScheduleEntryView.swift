@@ -10,18 +10,22 @@ import SwiftUI
 public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
     
     public var entry: Entry
+    public var day: Weekday
     public var options: WeekScheduleOptions
     public var entryHeight: CGFloat
     
-    public init(entry: Entry, options: WeekScheduleOptions) {
+    private let isToday: Bool
+    
+    public init(entry: Entry, day: Weekday, options: WeekScheduleOptions) {
         self.entry = entry
+        self.day = day
         self.options = options
         self.entryHeight = entry.entryHeight(entryHeight: options.entryHeight)
+        self.isToday = day.isToday
     }
     
     public var body: some View {
         VStack(spacing: 0){
-            let _ = print(entryHeight)
             if entryHeight > 60 { // If enough space > 20 in entryHeight - title - subtitle
                 Text(entry.startDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
                     .font(.system(size: 9))
@@ -53,6 +57,9 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(entry.color, lineWidth: 2)
         )
+        .brightness(isToday ? 0.1 : -0.1)
+        .saturation(isToday ? 1.3 : 1.0)
+        .opacity(isToday ? 1.0 : 0.8)
     }
     
 }
@@ -105,8 +112,8 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
             title: "المترجمات",
             subtitle: "2157",
             color: .green,
-            startComponents: DateComponents(hour: 8, minute: 25, weekday: 3),
-            endComponents: DateComponents(hour: 9, minute: 15, weekday: 3)
+            startComponents: DateComponents(hour: 8, minute: 25, weekday: 2),
+            endComponents: DateComponents(hour: 9, minute: 15, weekday: 2)
         ),
         TimeTableEvent(
             title: "المترجمات",

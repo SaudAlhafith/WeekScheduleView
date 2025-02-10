@@ -93,6 +93,28 @@ extension WeekSchedule {
         return hoursDate.sorted()
     }
     
+    var currentTimeLineY: CGFloat {
+        let nowHourMinute = Calendar.current.dateComponents([.hour, .minute], from: .now)
+        let hour = nowHourMinute.hour ?? 0
+        let minute = nowHourMinute.minute ?? 0
+        
+        let timeInMinutes = (hour * 60 + minute)
+        
+        guard timeInMinutes > (minHour * 60),
+              !entries.isEmpty else { return 0 }
+        
+        guard timeInMinutes < (maxHour * 60) else {
+            return CGFloat(dayHoursInt.count) * options.entryHeight
+        }
+        
+        let minuteHeight = options.entryHeight / 60
+        
+        let currentTimeLineY = CGFloat(timeInMinutes - (minHour * 60)) * minuteHeight
+        
+        return currentTimeLineY
+        
+    }
+    
     // MARK: Entry Logic
     // The position of the entry will be based on the index in entriesHours if certain variable is true
     

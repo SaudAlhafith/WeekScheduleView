@@ -19,6 +19,20 @@ public enum DayRange {
     /// - Parameter days: An array of `Weekday` values to specify the custom days.
     case custom(days: [Weekday])
     
+    /// Returns whether the range contains the given day.
+    func contains(_ day: Weekday) -> Bool {
+        switch self {
+        case .allDays:
+            return true
+            
+        case .weekdays:
+            return Weekday.weekdaysForCurrentLocale.contains(day)
+            
+        case .custom(let days):
+            return days.contains(day)
+        }
+    }
+    
     func resolvedDays() -> [Weekday] {
         switch self {
         case .allDays:
@@ -47,8 +61,14 @@ public enum Weekday: Int, CaseIterable {
     /// Returns the correct weekday index based on the current calendar and locale.
     var calendarIndex: Int {
         let calendar = Calendar.current
-        let firstWeekday = calendar.firstWeekday - 1 // Convert to 0-based index
-        return (self.rawValue + firstWeekday) % 7
+        let firstWeekday = calendar.firstWeekday
+        return (self.rawValue - firstWeekday) % 7
+    }
+    
+    /// Returns whether the weekday is today.
+    var isToday: Bool {
+        let today = Calendar.current.component(.weekday, from: Date())
+        return self.rawValue == today
     }
     
     public enum Style {
@@ -61,7 +81,7 @@ public enum Weekday: Int, CaseIterable {
     func name(style: Style = .wide) -> String {
         let symbols = DateFormatter.weekdayFormatter.weekdaySymbols ?? []
         let name = symbols[calendarIndex]
-        
+                
         switch style {
         case .wide:
             return name
@@ -74,10 +94,11 @@ public enum Weekday: Int, CaseIterable {
     
     static var weekdaysForCurrentLocale: [Weekday] {
         let calendar = Calendar.current
-        
+
         let weekendDays = calendar.weekendDays
         
-        return Weekday.allCases.filter { !weekendDays.contains($0) && $0 != .none }
+        let weekDays = Weekday.allCases.filter { !weekendDays.contains($0) && $0 != .none }
+        return weekDays
     }
     
     static var weekendForCurrentLocale: [Weekday] {
