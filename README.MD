@@ -59,32 +59,62 @@ Or add it directly in Xcode:
 
 ### Basic Example
 
-Here's how to create a simple weekly schedule:
+Here's how to create a simple workout schedule:
+
+<img src="Assets/WorkoutScheduleView.png" width="300" alt="Workout Schedule View.">
+
 
 ```swift
+import SwiftUI
 import WeekSchedule
 
-struct ContentView: View {
-    var entries: [MyEntry] = [
-        MyEntry(title: "Meeting", subtitle: "Team Sync", startTime: Date(), endTime: Date().addingTimeInterval(3600)),
-        MyEntry(title: "Lunch", subtitle: "Cafeteria", startTime: Date().addingTimeInterval(7200), endTime: Date().addingTimeInterval(9000))
+struct WorkoutScheduleView: View {
+    
+    var sessions: [WorkoutSession] = [
+        // ...
     ]
 
     var body: some View {
-        WeekSchedule(entries: entries) { entry, options in
-            VStack(alignment: .leading) {
-                Text(entry.title)
-                    .font(options.titleFont)
-                Text(entry.subtitle)
-                    .font(options.subtitleFont)
+        VStack {
+            WeekSchedule(entries: sessions) { entry, options in
+                VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(entry.title)
+                            .font(.caption)
+                            .bold()
+                        if let subtitle = entry.subtitle {
+                            Text(subtitle)
+                                .font(.caption2)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    VStack {
+                        Text(entry.startDate.formatted(.dateTime.hour().minute()))
+                            .bold()
+                        Text(entry.endDate.formatted(.dateTime.hour().minute()))
+                            .bold()
+                    }
+                    .font(.system(size: 8))
+                    .padding(.top, 2)
+
+                }
+                .padding(4)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(entry.color, lineWidth: 3)
+                )
+                .background(entry.color.opacity(0.3))
+                .cornerRadius(10)
             }
-            .padding()
-            .background(Color.blue.opacity(0.2))
-            .cornerRadius(8)
+            .dayRange(.custom(days: [.monday, .tuesday, .wednesday]))
+            .timelineRange(.entriesOnly)
+            .highlightToday(true)
+            .background(Color.gray.opacity(0.1), in: .rect(cornerRadius: 20))
+            .frame(height: UIScreen.main.bounds.height
+                   * 0.4)
+            Spacer()
         }
-        .dayRange(.weekdays)
-        .timelineRange(.entriesOnly)
-        .highlightToday(true)
     }
 }
 ```
