@@ -34,7 +34,7 @@ import SwiftUI
 public struct WeekScheduleOptions {
     
     /// Determines the range of days displayed in the schedule.
-    public var dayRange: DayRange = .custom(days: [])
+    public var dayRange: DayRange = .weekdays
     
     /// Determines the range of hours displayed in the timeline.
     public var timelineRange: TimelineRange = .entriesOnly

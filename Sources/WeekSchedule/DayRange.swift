@@ -34,7 +34,7 @@ public enum DayRange {
 }
 
 public enum Weekday: Int, CaseIterable {
-    case sunday = 0
+    case sunday = 1
     case monday
     case tuesday
     case wednesday
