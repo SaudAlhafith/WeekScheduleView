@@ -34,7 +34,7 @@ import SwiftUI
 public struct WeekScheduleOptions {
     
     /// Determines the range of days displayed in the schedule.
-    public var dayRange: DayRange = .weekdays
+    public var dayRange: DayRange = .custom(days: [])
     
     /// Determines the range of hours displayed in the timeline.
     public var timelineRange: TimelineRange = .entriesOnly
@@ -95,22 +95,39 @@ public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
             HStack(alignment: .top) {
                 timeline
                     .padding(.top, 14)
-                HStack(alignment: .top, spacing: options.daySpacing){
-                    ForEach(options.dayRange.resolvedDays(), id: \.rawValue) { day in
-                        dayColumn(day)
-                    }
-                }
-                .background(alignment: .top) {
-                    VStack(spacing: 0){
-                        ForEach(dayHoursInt, id: \.hashValue) { inf in
-                            Rectangle()
-                                .fill(.gray)
-                                .frame(height: 1, alignment: .top)
-                                .frame(height: options.entryHeight, alignment: .top)
+                if !options.dayRange.resolvedDays().isEmpty {
+                    HStack(alignment: .top, spacing: options.daySpacing){
+                        ForEach(options.dayRange.resolvedDays(), id: \.rawValue) { day in
+                            dayColumn(day)
                         }
                     }
-                    .padding(.top, 20)
+                    .background(alignment: .top) {
+                        VStack(spacing: 0){
+                            ForEach(dayHoursInt, id: \.hashValue) { inf in
+                                Rectangle()
+                                    .fill(.gray)
+                                    .frame(height: 1, alignment: .top)
+                                    .frame(height: options.entryHeight, alignment: .top)
+                            }
+                        }
+                        .padding(.top, 20)
+                    }
                 }
+                // I guess I will make it up to the developer from outside
+//                else {
+//                    VStack(spacing: 10){
+//                        Spacer()
+//                        Image(systemName: "exclamationmark.triangle.fill")
+//                            .foregroundStyle(.gray)
+//                            .font(.title)
+//                        Text("No days provided.")
+//                            .foregroundStyle(.gray)
+//                            .font(.footnote)
+//                        Spacer()
+//                    }
+//                        .frame(maxWidth: .infinity)
+//                }
+                
             }
             .padding(.horizontal, 4)
             .frame(height: scheduleHeight)
