@@ -100,7 +100,7 @@ extension WeekSchedule {
         
         let timeInMinutes = (hour * 60 + minute)
         
-        guard timeInMinutes > (minHour * 60),
+        guard timeInMinutes >= (minHour * 60),
               !entries.isEmpty else { return 0 }
         
         guard timeInMinutes < (maxHour * 60) else {

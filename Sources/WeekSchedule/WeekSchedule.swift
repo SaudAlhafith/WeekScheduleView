@@ -74,6 +74,12 @@ public struct WeekScheduleOptions {
     /// Timeline hour color
     public var timelineColor: Color = .gray
     
+    /// Timeline hour color
+    public var timelineIndicatorShowing: Bool = false
+    
+    /// Timeline hour color
+    public var timelineIndicatorColor: Color = Color.accentColor
+    
     /// Font used for the title.
     public var isEntryTimeShowing: Bool = false
     
@@ -117,12 +123,33 @@ public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
                     }
                     .padding(.top, 20)
                 }
-                
+                .overlay(alignment: .top) {
+                    if options.timelineIndicatorShowing{
+                        timelineIndicator
+                    }
+                }
                 
             }
             .padding(.horizontal, 4)
             .frame(height: scheduleHeight)
         }
+    }
+    
+    var timelineIndicator: some View {
+        
+        HStack(alignment: .center, spacing: 0){
+            Image(systemName: "chevron.\(layoutDirection == .leftToRight ? "right" : "left")")
+                .font(.caption2.bold())
+                .foregroundStyle(options.timelineIndicatorColor)
+            
+            RoundedRectangle(cornerRadius: 2)
+                .fill(options.timelineIndicatorColor)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(height: 1.5)
+        }
+        .padding(.leading, -10)
+        .offset(y: currentTimeLineY)
+        .offset(y: 14.5)
     }
     
     var timeline: some View {
@@ -171,7 +198,7 @@ extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
             title: "المترجمات",
             subtitle: "2157",
             color: .green,
-            startComponents: DateComponents(hour: 8, minute: 25, weekday: 1),
+            startComponents: DateComponents(hour: 1, minute: 25, weekday: 1),
             endComponents: DateComponents(hour: 9, minute: 15, weekday: 1)
         ),
         TimeTableEvent(
@@ -252,4 +279,5 @@ extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
             endComponents: DateComponents(hour: 15, minute: 10, weekday: 3)
         )
     ], options: WeekScheduleOptions())
+    
 }

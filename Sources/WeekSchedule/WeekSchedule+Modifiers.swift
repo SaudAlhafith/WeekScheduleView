@@ -9,13 +9,6 @@ import SwiftUI
 
 public extension WeekSchedule {
     
-    /// Sets the range of days displayed in the schedule.
-    func dayRange(_ dayRange: DayRange = .weekdays) -> WeekSchedule {
-        var view = self
-        view.options.dayRange = dayRange
-        return view
-    }
-    
     /// Sets the range of hours displayed in the timeline.
     func timelineRange(_ timelineRange: TimelineRange = .entriesOnly) -> WeekSchedule {
         var view = self
@@ -51,45 +44,36 @@ public extension WeekSchedule {
         return view
     }
     
-    /// Sets the vertical spacing between schedule days.
-    func daySpacing(_ spacing: CGFloat) -> WeekSchedule {
+    /// Sets the day range to display in the schedule, adjust spacing between days, and customize the day font.
+    func scheduleDays(
+        dayRange: DayRange = .weekdays,
+        daySpacing: CGFloat = 4,
+        dayFont: Font = .system(size: 10),
+        currentDayFont: Font = .system(size: 12, weight: .bold),
+        dayStyle: Weekday.Style = .wide
+    ) -> WeekSchedule {
         var view = self
-        view.options.daySpacing = spacing
+        view.options.dayRange = dayRange
+        view.options.daySpacing = daySpacing
+        view.options.dayFont = dayFont
+        view.options.currentDayFont = currentDayFont
+        view.options.dayStyle = dayStyle
         return view
     }
     
-    /// Sets the font used for the day labels.
-    func dayFont(_ font: Font) -> WeekSchedule {
-        var view = self
-        view.options.dayFont = font
-        return view
-    }
     
-    /// Sets the font used for the day labels.
-    func currentDayFont(_ font: Font) -> WeekSchedule {
-        var view = self
-        view.options.currentDayFont = font
-        return view
-    }
-    
-    /// Sets the day style format.
-    func dayStyle(_ style: Weekday.Style) -> WeekSchedule {
-        var view = self
-        view.options.dayStyle = style
-        return view
-    }
-    
-    /// Sets the font for the timeline hour labels.
-    func timelineFont(_ font: Font) -> WeekSchedule {
+    /// Sets the font used for the time labels.
+    func timeline(_ color: Color, font: Font) -> WeekSchedule {
         var view = self
         view.options.timelineFont = font
+        view.options.timelineColor = color
         return view
     }
     
-    /// Sets the font for the timeline hour labels.
-    func timelineColor(_ color: Color) -> WeekSchedule {
+    func timelineIndicator(_ color: Color) -> WeekSchedule {
         var view = self
-        view.options.timelineColor = color
+        view.options.timelineIndicatorShowing = true
+        view.options.timelineIndicatorColor = color
         return view
     }
     
