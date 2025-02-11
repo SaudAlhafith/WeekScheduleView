@@ -65,7 +65,7 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
 }
 
 #Preview {
-    WeekSchedule(entries: [
+    WeekScheduleView(entries: [
         TimeTableEvent(
             title: "المترجمات",
             subtitle: "2157",

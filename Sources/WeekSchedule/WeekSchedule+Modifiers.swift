@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-public extension WeekSchedule {
+public extension WeekScheduleView {
     
     /// Sets the range of hours displayed in the timeline.
-    func timelineRange(_ timelineRange: TimelineRange = .entriesOnly) -> WeekSchedule {
+    func timelineRange(_ timelineRange: TimelineRange = .entriesOnly) -> WeekScheduleView {
         var view = self
         view.options.timelineRange = timelineRange
         return view
@@ -23,7 +23,7 @@ public extension WeekSchedule {
         dayFont: Font = .system(size: 10),
         currentDayFont: Font = .system(size: 12, weight: .bold),
         dayStyle: Weekday.Style = .wide
-    ) -> WeekSchedule {
+    ) -> WeekScheduleView {
         var view = self
         view.options.dayRange = dayRange
         view.options.daySpacing = daySpacing
@@ -35,14 +35,14 @@ public extension WeekSchedule {
     
     
     /// Sets the font used for the time labels.
-    func timeline(_ color: Color, font: Font) -> WeekSchedule {
+    func timeline(_ color: Color, font: Font) -> WeekScheduleView {
         var view = self
         view.options.timelineFont = font
         view.options.timelineColor = color
         return view
     }
     
-    func timelineIndicator(_ color: Color) -> WeekSchedule {
+    func timelineIndicator(_ color: Color) -> WeekScheduleView {
         var view = self
         view.options.timelineIndicatorShowing = true
         view.options.timelineIndicatorColor = color
@@ -50,28 +50,28 @@ public extension WeekSchedule {
     }
         
     /// Sets the height of each schedule entry.
-    func isEntryExpanded(_ isEntryExpanded: Bool) -> WeekSchedule {
+    func isEntryExpanded(_ isEntryExpanded: Bool) -> WeekScheduleView {
         var view = self
         view.options.isEntryExpanded = isEntryExpanded
         return view
     }
     
     /// Sets the height of each schedule entry.
-    func entryNormalHeight(_ height: CGFloat) -> WeekSchedule {
+    func entryNormalHeight(_ height: CGFloat) -> WeekScheduleView {
         var view = self
         view.options.entryNormalHeight = height
         return view
     }
     
     /// Sets the height of each schedule entry when expanded.
-    func entryExpandedHeight(_ height: CGFloat) -> WeekSchedule {
+    func entryExpandedHeight(_ height: CGFloat) -> WeekScheduleView {
         var view = self
         view.options.entryExpandedHeight = height
         return view
     }
     
     /// Sets the font for the time labels.
-    func isEntryTimeShowing(_ isEntryTimeShowing: Bool) -> WeekSchedule {
+    func isEntryTimeShowing(_ isEntryTimeShowing: Bool) -> WeekScheduleView {
         var view = self
         view.options.isEntryTimeShowing = isEntryTimeShowing
         return view

@@ -1,5 +1,5 @@
 //
-//  WeekSchedule+Helpers.swift
+//  WeekScheduleView+Helpers.swift
 //  WeekSchedule
 //
 //  Created by saudAlhafith on 07/01/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
  
-extension WeekSchedule {
+extension WeekScheduleView {
     
     var scheduleHeight: CGFloat {
         return CGFloat(dayHoursInt.count + 1) * options.entryHeight
@@ -146,7 +146,7 @@ extension WeekSchedule {
 }
 
 #Preview {
-    WeekSchedule(entries: [
+    WeekScheduleView(entries: [
         TimeTableEvent(
             title: "المترجمات",
             subtitle: "2157",

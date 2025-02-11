@@ -1,6 +1,6 @@
 /*
  
- WeekSchedule.swift
+ WeekScheduleView.swift
  WeekSchedule
  
  Created by saudAlhafith on 6/1/2025.
@@ -86,7 +86,7 @@ public struct WeekScheduleOptions {
 
 public typealias EntryViewBuilder<EntryView: View, Entry: WeekScheduleEntry> = (_ entry: Entry, _ day: Weekday, _ options: WeekScheduleOptions) -> EntryView
 
-public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
+public struct WeekScheduleView<EntryView: View, Entry: WeekScheduleEntry>: View {
     @Environment(\.layoutDirection) private var layoutDirection
     
     var entries: [Entry]
@@ -179,7 +179,7 @@ public struct WeekSchedule<EntryView: View, Entry: WeekScheduleEntry>: View {
     }
 }
 
-extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
+extension WeekScheduleView where EntryView == WeekScheduleEntryView<Entry> {
     public init(entries: [Entry], options: WeekScheduleOptions = WeekScheduleOptions()) {
         self.entries = entries
         self.options = options
@@ -190,7 +190,7 @@ extension WeekSchedule where EntryView == WeekScheduleEntryView<Entry> {
 }
 
 #Preview {
-    WeekSchedule(entries: [
+    WeekScheduleView(entries: [
         TimeTableEvent(
             title: "المترجمات",
             subtitle: "2157",
