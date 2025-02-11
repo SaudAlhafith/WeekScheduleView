@@ -39,9 +39,6 @@ public struct WeekScheduleOptions {
     /// Determines the range of hours displayed in the timeline.
     public var timelineRange: TimelineRange = .entriesOnly
     
-    /// Determines whether to highlight today's entries
-    public var highlightToday: Bool = true
-    
     /// Vertical spacing between schedule days.
     public var daySpacing: CGFloat = 4
     

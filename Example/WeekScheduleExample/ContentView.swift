@@ -16,12 +16,11 @@ struct ContentView: View {
     var body: some View {
         VStack {
             WeekSchedule(entries: example)
-                .dayRange(.weekdays) // Show full week
+                .scheduleDays(.weekdays) // Show full week
                 .timelineRange(.entriesOnly) // Show 24-hour timeline
                 .highlightToday(false) // Disable today's highlight
                 .entryNormalHeight(50) // Set normal entry height
                 .entryExpandedHeight(80) // Set expanded entry height
-                .daySpacing(10) // Add spacing between days
                 .isEntryTimeShowing(true) // Show entry times
                 .isEntryExpanded(true)
         }

@@ -16,37 +16,9 @@ public extension WeekSchedule {
         return view
     }
     
-    /// Enables or disables highlighting today's entries.
-    func highlightToday(_ value: Bool = true) -> WeekSchedule {
-        var view = self
-        view.options.highlightToday = value
-        return view
-    }
-    
-    /// Sets the height of each schedule entry.
-    func isEntryExpanded(_ isEntryExpanded: Bool) -> WeekSchedule {
-        var view = self
-        view.options.isEntryExpanded = isEntryExpanded
-        return view
-    }
-    
-    /// Sets the height of each schedule entry.
-    func entryNormalHeight(_ height: CGFloat) -> WeekSchedule {
-        var view = self
-        view.options.entryNormalHeight = height
-        return view
-    }
-    
-    /// Sets the height of each schedule entry when expanded.
-    func entryExpandedHeight(_ height: CGFloat) -> WeekSchedule {
-        var view = self
-        view.options.entryExpandedHeight = height
-        return view
-    }
-    
     /// Sets the day range to display in the schedule, adjust spacing between days, and customize the day font.
     func scheduleDays(
-        dayRange: DayRange = .weekdays,
+        _ dayRange: DayRange,
         daySpacing: CGFloat = 4,
         dayFont: Font = .system(size: 10),
         currentDayFont: Font = .system(size: 12, weight: .bold),
@@ -74,6 +46,27 @@ public extension WeekSchedule {
         var view = self
         view.options.timelineIndicatorShowing = true
         view.options.timelineIndicatorColor = color
+        return view
+    }
+        
+    /// Sets the height of each schedule entry.
+    func isEntryExpanded(_ isEntryExpanded: Bool) -> WeekSchedule {
+        var view = self
+        view.options.isEntryExpanded = isEntryExpanded
+        return view
+    }
+    
+    /// Sets the height of each schedule entry.
+    func entryNormalHeight(_ height: CGFloat) -> WeekSchedule {
+        var view = self
+        view.options.entryNormalHeight = height
+        return view
+    }
+    
+    /// Sets the height of each schedule entry when expanded.
+    func entryExpandedHeight(_ height: CGFloat) -> WeekSchedule {
+        var view = self
+        view.options.entryExpandedHeight = height
         return view
     }
     
