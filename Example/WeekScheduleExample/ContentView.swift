@@ -15,7 +15,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            WeekSchedule(entries: example)
+            WeekScheduleView(entries: example)
                 .scheduleDays(.weekdays, daySpacing: 4, dayFont: .system(size: 10), currentDayFont: .system(size: 12, weight: .bold), dayStyle: .wide) // Show weekdays with some styling
                 .timelineIndicator(.red)
                 .timelineRange(.entriesOnly) // Show 24-hour timeline
