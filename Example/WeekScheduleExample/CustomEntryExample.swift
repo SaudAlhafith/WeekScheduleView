@@ -133,9 +133,8 @@ struct WorkoutScheduleView: View {
                 .background(entry.color.opacity(0.3))
                 .cornerRadius(10)
             }
-            .dayRange(.custom(days: [.monday, .tuesday, .wednesday]))
+            .scheduleDays(.custom(days: [.monday, .tuesday, .wednesday]))
             .timelineRange(.entriesOnly)
-            .highlightToday(true)
             .background(Color.gray.opacity(0.1), in: .rect(cornerRadius: 20))
             .frame(height: UIScreen.main.bounds.height
                    * 0.4)
