@@ -26,7 +26,7 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
     
     public var body: some View {
         VStack(spacing: 0){
-            if entryHeight > 60 { // If enough space > 20 in entryHeight - title - subtitle
+            if options.isEntryTimeShowing {
                 Text(entry.startDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
                     .font(.system(size: 9))
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -41,7 +41,7 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
                 }
             }
             .frame(maxHeight: .infinity)
-            if entryHeight > 60 { // If enough space > 20 in entryHeight - title - subtitle
+            if options.isEntryTimeShowing { 
                 Text(entry.endDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
                     .font(.system(size: 9))
                     .frame(maxWidth: .infinity, alignment: .trailing)
