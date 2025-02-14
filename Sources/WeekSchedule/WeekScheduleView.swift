@@ -128,7 +128,7 @@ public struct WeekScheduleView<EntryView: View, Entry: WeekScheduleEntry>: View 
                 
             }
             .padding(.horizontal, 4)
-            .frame(height: scheduleHeight)
+            .frame(height: scheduleHeight, alignment: .top)
         }
     }
     
