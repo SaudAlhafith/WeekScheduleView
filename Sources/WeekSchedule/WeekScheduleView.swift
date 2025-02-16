@@ -85,6 +85,7 @@ public struct WeekScheduleOptions {
 }
 
 public typealias EntryViewBuilder<EntryView: View, Entry: WeekScheduleEntry> = (_ entry: Entry, _ day: Weekday, _ options: WeekScheduleOptions) -> EntryView
+public typealias EntryOnClick<Entry : WeekScheduleEntry> = (_ entry: Entry) -> Void
 
 public struct WeekScheduleView<EntryView: View, Entry: WeekScheduleEntry>: View {
     @Environment(\.layoutDirection) private var layoutDirection
@@ -92,11 +93,18 @@ public struct WeekScheduleView<EntryView: View, Entry: WeekScheduleEntry>: View 
     var entries: [Entry]
     var options: WeekScheduleOptions
     var entryViewBuilder: EntryViewBuilder<EntryView, Entry>
+    var entryOnClick: EntryOnClick<Entry>
     
-    public init(entries: [Entry], options: WeekScheduleOptions = WeekScheduleOptions(), @ViewBuilder entryViewBuilder: @escaping EntryViewBuilder<EntryView, Entry>) {
+    public init(
+        entries: [Entry],
+        options: WeekScheduleOptions = WeekScheduleOptions(),
+        @ViewBuilder entryViewBuilder: @escaping EntryViewBuilder<EntryView, Entry>,
+        entryOnClick: @escaping EntryOnClick<Entry> = {_ in}
+    ) {
         self.entries = entries
         self.options = options
         self.entryViewBuilder = entryViewBuilder
+        self.entryOnClick = entryOnClick
     }
     
     public var body: some View {
@@ -171,6 +179,9 @@ public struct WeekScheduleView<EntryView: View, Entry: WeekScheduleEntry>: View 
                 ForEach(getEntriesFor(day: day)) { entry in
                     entryViewBuilder(entry, day, options)
                         .frame(maxHeight: entry.entryHeight(entryHeight: options.entryHeight), alignment: .top)
+                        .onTapGesture {
+                            entryOnClick(entry)
+                        }
                         .offset(y: entryYPosition(entry))
                 }
             }
@@ -180,12 +191,17 @@ public struct WeekScheduleView<EntryView: View, Entry: WeekScheduleEntry>: View 
 }
 
 extension WeekScheduleView where EntryView == WeekScheduleEntryView<Entry> {
-    public init(entries: [Entry], options: WeekScheduleOptions = WeekScheduleOptions()) {
+    public init(
+        entries: [Entry],
+        options: WeekScheduleOptions = WeekScheduleOptions(),
+        entryOnClick: @escaping EntryOnClick<Entry> = {_ in}
+    ) {
         self.entries = entries
         self.options = options
         self.entryViewBuilder = { entry, day, options in
             return WeekScheduleEntryView(entry: entry, day: day, options: options)
         }
+        self.entryOnClick = entryOnClick
     }
 }
 
@@ -195,7 +211,7 @@ extension WeekScheduleView where EntryView == WeekScheduleEntryView<Entry> {
             title: "المترجمات",
             subtitle: "2157",
             color: .green,
-            startComponents: DateComponents(hour: 1, minute: 25, weekday: 1),
+            startComponents: DateComponents(hour: 9, minute: 25, weekday: 1),
             endComponents: DateComponents(hour: 9, minute: 15, weekday: 1)
         ),
         TimeTableEvent(
@@ -237,8 +253,8 @@ extension WeekScheduleView where EntryView == WeekScheduleEntryView<Entry> {
             title: "المترجمات",
             subtitle: "2157",
             color: .green,
-            startComponents: DateComponents(hour: 8, minute: 25, weekday: 2),
-            endComponents: DateComponents(hour: 9, minute: 15, weekday: 2)
+            startComponents: DateComponents(hour: 8, minute: 25, weekday: 3),
+            endComponents: DateComponents(hour: 9, minute: 15, weekday: 3)
         ),
         TimeTableEvent(
             title: "المترجمات",
@@ -275,6 +291,8 @@ extension WeekScheduleView where EntryView == WeekScheduleEntryView<Entry> {
             startComponents: DateComponents(hour: 14, minute: 20, weekday: 3),
             endComponents: DateComponents(hour: 15, minute: 10, weekday: 3)
         )
-    ], options: WeekScheduleOptions())
+    ], options: WeekScheduleOptions()) { entry in
+        print(entry)
+    }
     
 }
