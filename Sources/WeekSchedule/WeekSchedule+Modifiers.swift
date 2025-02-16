@@ -48,25 +48,19 @@ public extension WeekScheduleView {
         view.options.timelineIndicatorColor = color
         return view
     }
+    
+    /// Sets the Entry height per hour in normal case and in the expanded case.
+    func entryHeight(_ entryNormalHeight: CGFloat, _ entryExpandedHeight: CGFloat) -> WeekScheduleView {
+        var view = self
+        view.options.entryNormalHeight = entryNormalHeight
+        view.options.entryExpandedHeight = entryExpandedHeight
+        return view
+    }
         
     /// Sets the height of each schedule entry.
     func isEntryExpanded(_ isEntryExpanded: Bool) -> WeekScheduleView {
         var view = self
         view.options.isEntryExpanded = isEntryExpanded
-        return view
-    }
-    
-    /// Sets the height of each schedule entry.
-    func entryNormalHeight(_ height: CGFloat) -> WeekScheduleView {
-        var view = self
-        view.options.entryNormalHeight = height
-        return view
-    }
-    
-    /// Sets the height of each schedule entry when expanded.
-    func entryExpandedHeight(_ height: CGFloat) -> WeekScheduleView {
-        var view = self
-        view.options.entryExpandedHeight = height
         return view
     }
     
