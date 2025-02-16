@@ -19,8 +19,7 @@ struct ContentView: View {
                 .scheduleDays(.weekdays, daySpacing: 4, dayFont: .system(size: 10), currentDayFont: .system(size: 12, weight: .bold), dayStyle: .wide) // Show weekdays with some styling
                 .timelineIndicator(.red)
                 .timelineRange(.entriesOnly) // Show 24-hour timeline
-                .entryNormalHeight(50) // Set normal entry height
-                .entryExpandedHeight(80) // Set expanded entry height
+                .entryHeight(50, 80) // Set normal and expanded entry height
                 .isEntryTimeShowing(true) // Show entry times
                 .isEntryExpanded(true)
         }
