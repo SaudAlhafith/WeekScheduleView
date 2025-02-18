@@ -54,7 +54,7 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
         .background(entry.color.opacity(0.3), in: .rect(cornerRadius: 5))
         .overlay(
             RoundedRectangle(cornerRadius: 5)
-                .stroke(entry.color, lineWidth: 2)
+                .strokeBorder(entry.color, lineWidth: 2)
         )
         .brightness(isToday ? 0.1 : -0.1)
         .saturation(isToday ? 1.3 : 1.0)
