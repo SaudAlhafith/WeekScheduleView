@@ -160,7 +160,7 @@ public struct WeekScheduleView<EntryView: View, Entry: WeekScheduleEntry>: View 
     var timeline: some View {
         VStack(alignment: .trailing, spacing: 0){
             ForEach(dayHoursDate, id: \.hashValue) { hour in
-                Text(hour.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated))))
+                Text(hour.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated))))
                     .font(options.timelineFont)
                     .foregroundColor(options.timelineColor)
                     .frame(height: options.entryHeight, alignment: .top)
