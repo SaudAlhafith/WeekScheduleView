@@ -135,9 +135,9 @@ struct WorkoutScheduleView: View {
             }
             .scheduleDays(.custom(days: [.monday, .tuesday, .wednesday]))
             .timelineRange(.entriesOnly)
+            .timelineIndicator(.red)
             .background(Color.gray.opacity(0.1), in: .rect(cornerRadius: 20))
-            .frame(height: UIScreen.main.bounds.height
-                   * 0.4)
+            .frame(height: UIScreen.main.bounds.height * 0.4)
             Spacer()
         }
     }
@@ -146,3 +146,4 @@ struct WorkoutScheduleView: View {
 #Preview {
     WorkoutScheduleView()
 }
+
