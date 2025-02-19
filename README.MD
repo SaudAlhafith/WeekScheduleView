@@ -8,13 +8,12 @@
 
 [![contact: @SaudAlhafith](https://img.shields.io/badge/contact-%40SaudAlhafith-blue.svg?style=flat)](https://t.me/SaudAlhafith)
 
-Usage example in a production app
-<p align="left">
-<img src="Assets/ScheduleViewInMoqraraty.png" alt="WeekScheduleView" width="600">
-</p>
-
 **WeekSchedule** is a SwiftUI package designed to help you easily create and manage weekly schedules in your iOS and macOS applications. Whether you're building a calendar app, a task scheduler, or a time management tool, `WeekSchedule` provides a flexible and customizable way to display and interact with weekly timelines.
 
+Usage example in a production app
+<p align="left">
+<img src="Assets/ScheduleViewInMoqraraty.png" alt="WeekScheduleView" width="400">
+</p>
 ---
 
 ## Features
