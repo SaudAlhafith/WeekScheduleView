@@ -4,7 +4,7 @@
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSaudAlhafith%2FWeekScheduleView%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/SaudAlhafith/WeekScheduleView)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSaudAlhafith%2FWeekScheduleView%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/SaudAlhafith/WeekScheduleView)
 [![](https://img.shields.io/badge/SPM-supported-DE5C43.svg?color=brightgreen)](https://swift.org/package-manager/)
-![](https://img.shields.io/github/license/2FSaudAlhafith/WeekScheduleView)
+![](https://img.shields.io/github/license/SaudAlhafith/WeekScheduleView)
 
 [![contact: @SaudAlhafith](https://img.shields.io/badge/contact-%40SaudAlhafith-blue.svg?style=flat)](https://t.me/SaudAlhafith)
 
