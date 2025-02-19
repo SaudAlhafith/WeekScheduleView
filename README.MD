@@ -43,7 +43,7 @@ To integrate `WeekSchedule` into your project using SwiftPM, add the following t
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SaudAlhafith/WeekScheduleView", from: "0.1.0"),
+    .package(url: "https://github.com/SaudAlhafith/WeekScheduleView", from: "0.3.0"),
 ],
 ```
 
@@ -76,10 +76,10 @@ struct WorkoutScheduleView: View {
 
     var body: some View {
         VStack {
-            WeekSchedule(entries: sessions) { entry, options in
+            WeekScheduleView(entries: sessions) { entry, day, options in
                 VStack(alignment: .leading, spacing: 4) {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(entry.title)
+                        Text("\(day.name(style: .wide)) - \(entry.title)")
                             .font(.caption)
                             .bold()
                         if let subtitle = entry.subtitle {
@@ -107,12 +107,11 @@ struct WorkoutScheduleView: View {
                 .background(entry.color.opacity(0.3))
                 .cornerRadius(10)
             }
-            .dayRange(.custom(days: [.monday, .tuesday, .wednesday]))
+            .scheduleDays(.custom(days: [.monday, .tuesday, .wednesday]))
             .timelineRange(.entriesOnly)
-            .highlightToday(true)
+            .timelineIndicator(.red) // New timeline indicator customization
             .background(Color.gray.opacity(0.1), in: .rect(cornerRadius: 20))
-            .frame(height: UIScreen.main.bounds.height
-                   * 0.4)
+            .frame(height: UIScreen.main.bounds.height * 0.4)
             Spacer()
         }
     }
@@ -124,18 +123,13 @@ struct WorkoutScheduleView: View {
 You can customize the schedule using the provided modifiers:
 
 ```swift
-WeekSchedule(entries: entries)
-    .dayRange(.fullWeek) // Show full week
+WeekScheduleView(entries: entries)
+    .scheduleDays(.fullWeek, daySpacing: 10, dayFont: .headline) // Show full week with spacing and font customization
     .timelineRange(.fullDay) // Show 24-hour timeline
-    .highlightToday(false) // Disable today's highlight
-    .entryNormalHeight(50) // Set normal entry height
-    .entryExpandedHeight(100) // Set expanded entry height
-    .daySpacing(10) // Add spacing between days
-    .dayFont(.headline) // Customize day font
-    .timelineFont(.caption) // Customize timeline font
-    .titleFont(.title3) // Customize title font
-    .subtitleFont(.subheadline) // Customize subtitle font
-    .timeFont(.caption2) // Customize time font
+    .timeline(.gray, font: .caption) // Customize timeline appearance
+    .timelineIndicator(.red) // Change timeline indicator color
+    .entryHeight(50, 100) // Set normal and expanded entry height
+    .isEntryExpanded(true) // Expand entries
     .isEntryTimeShowing(true) // Show entry times
 ```
 
@@ -146,13 +140,13 @@ WeekSchedule(entries: entries)
 You can provide custom views for schedule entries using the `entryViewBuilder` closure:
 
 ```swift
-WeekSchedule(entries: entries) { entry, options in
+WeekScheduleView(entries: entries) { entry, day, options in
     HStack {
-        Text(entry.title)
-            .font(options.titleFont)
+        Text("\(day.name(style: .wide)) - \(entry.title)")
+            .font(options.dayFont)
         Spacer()
         Text(entry.subtitle)
-            .font(options.subtitleFont)
+            .font(options.currentDayFont)
     }
     .padding()
     .background(Color.green.opacity(0.2))
@@ -167,7 +161,7 @@ WeekSchedule(entries: entries) { entry, options in
 `WeekSchedule` fully supports right-to-left (RTL) languages. Simply set the environment's layout direction:
 
 ```swift
-WeekSchedule(entries: entries)
+WeekScheduleView(entries: entries)
     .environment(\.layoutDirection, .rightToLeft)
 ```
 
