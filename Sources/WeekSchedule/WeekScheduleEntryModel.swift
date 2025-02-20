@@ -35,6 +35,8 @@ public extension WeekScheduleEntry {
     var endMinute: Int { endDate.minute }
     
     func entryHeight(entryHeight: CGFloat) -> CGFloat {
+        let endHour = endHour == 0 ? 24 : endHour
+        
         let duration = abs(endHour - startHour) * 60 + endMinute - startMinute
         let minuteHeight = entryHeight / 60
         

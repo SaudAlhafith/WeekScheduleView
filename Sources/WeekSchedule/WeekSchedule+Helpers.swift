@@ -19,7 +19,7 @@ extension WeekScheduleView {
         var hourAdded : Set<Int> = []
         
         for entry in entries {
-            var endHour = entry.endHour
+            var endHour = entry.endHour == 0 ? 24 : entry.endHour
             if entry.endMinute == 0 && endHour - 1 >= entry.startHour {
                 endHour -= 1
             }
@@ -36,8 +36,6 @@ extension WeekScheduleView {
     var maxHour: Int { return entriesHours.max() ?? 0}
     
     var dayHoursInt: [Int] {
-        let startOfDay = Date.now.startOfDay
-        
         var lowerBound: Int = 0
         var upperBound: Int = 0
         

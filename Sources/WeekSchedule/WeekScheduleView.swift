@@ -204,3 +204,22 @@ extension WeekScheduleView where EntryView == WeekScheduleEntryView<Entry> {
         self.entryOnClick = entryOnClick
     }
 }
+
+#Preview {
+    WeekScheduleView(entries: [
+        TimeTableEvent(
+            title: "المترجمات",
+            subtitle: "2157",
+            color: .green,
+            startComponents: DateComponents(hour: 22, minute: 50, weekday: 2),
+            endComponents: DateComponents(hour: 23, minute: 25, weekday: 2)
+        ),
+        TimeTableEvent(
+            title: "المترجمات",
+            subtitle: "2157",
+            color: .green,
+            startComponents: DateComponents(hour: 23, minute: 30, weekday: 2),
+            endComponents: DateComponents(hour: 00, minute: 5, weekday: 2)
+        )
+    ], options: WeekScheduleOptions())
+}
