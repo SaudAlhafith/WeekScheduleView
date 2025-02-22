@@ -107,8 +107,13 @@ extension WeekScheduleView {
         
         let minuteHeight = options.entryHeight / 60
         
-        let currentTimeLineY = CGFloat(timeInMinutes - (minHour * 60)) * minuteHeight
-        
+        var currentTimeLineY: CGFloat = CGFloat(minute) * minuteHeight
+        if let hourPosition = dayHoursInt.firstIndex(of: hour) {
+            currentTimeLineY += CGFloat(hourPosition) * options.entryHeight
+        } else if let hourPosition = dayHoursInt.firstIndex(where: {$0 > hour}) {
+            currentTimeLineY = CGFloat(hourPosition) * options.entryHeight + 1.0
+        }
+            
         return currentTimeLineY
         
     }
@@ -149,44 +154,47 @@ extension WeekScheduleView {
             title: "المترجمات",
             subtitle: "2157",
             color: .green,
-            startComponents: DateComponents(hour: 8, minute: 25),
-            endComponents: DateComponents(hour: 9, minute: 15)
+            startComponents: DateComponents(hour: 8+0, minute: 25, weekday: 1),
+            endComponents: DateComponents(hour: 9+0, minute: 15, weekday: 1)
         ),
         TimeTableEvent(
             title: "المترجمات",
             subtitle: "2157",
             color: .green,
-            startComponents: DateComponents(hour: 9, minute: 20),
-            endComponents: DateComponents(hour: 10, minute: 10)
+            startComponents: DateComponents(hour: 9+0, minute: 20, weekday: 1),
+            endComponents: DateComponents(hour: 10+0, minute: 10, weekday: 1)
         ),
         TimeTableEvent(
             title: "أمن المعلومات",
             subtitle: "3040",
             color: .red,
-            startComponents: DateComponents(hour: 10, minute: 15),
-            endComponents: DateComponents(hour: 11, minute: 5)
+            startComponents: DateComponents(hour: 10+0, minute: 15, weekday: 1),
+            endComponents: DateComponents(hour: 11+0, minute: 5, weekday: 1)
         ),
         TimeTableEvent(
             title: "أمن المعلومات",
             subtitle: "3040",
             color: .red,
-            startComponents: DateComponents(hour: 11, minute: 10),
-            endComponents: DateComponents(hour: 12, minute: 0)
+            startComponents: DateComponents(hour: 11+0, minute: 10, weekday: 1),
+            endComponents: DateComponents(hour: 12+0, minute: 0, weekday: 1)
         ),
         TimeTableEvent(
             title: "مبادئ قواعد البيانات",
             subtitle: "2029",
             color: .blue,
-            startComponents: DateComponents(hour: 13, minute: 25),
-            endComponents: DateComponents(hour: 14, minute: 15)
+            startComponents: DateComponents(hour: 14+0, minute: 25, weekday: 1),
+            endComponents: DateComponents(hour: 15+0, minute: 15, weekday: 1)
         ),
         TimeTableEvent(
             title: "مبادئ قواعد البيانات",
             subtitle: "2029",
             color: .blue,
-            startComponents: DateComponents(hour: 14, minute: 20),
-            endComponents: DateComponents(hour: 15, minute: 10)
+            startComponents: DateComponents(hour: 15+0, minute: 20, weekday: 1),
+            endComponents: DateComponents(hour: 16+0, minute: 10, weekday: 1)
         )
     ], options: WeekScheduleOptions())
+    .timelineIndicator(.red)
+    .isEntryTimeShowing(true)
+    .isEntryExpanded(true)
+    .entryHeight(50, 90)
 }
-

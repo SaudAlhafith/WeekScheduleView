@@ -119,10 +119,13 @@ public struct WeekScheduleView<EntryView: View, Entry: WeekScheduleEntry>: View 
                 }
                 .background(alignment: .top) {
                     VStack(spacing: 0){
-                        ForEach(dayHoursInt, id: \.hashValue) { inf in
-                            Rectangle()
+                        ForEach(dayHoursInt.indices, id: \.self) { index in
+                            let hour = dayHoursInt[index]
+                            let prevHour = index >= 1 ? dayHoursInt[index - 1] : hour
+                            let isSkippingHour = hour - prevHour > 1
+                            RoundedRectangle(cornerRadius: 5)
                                 .fill(.gray)
-                                .frame(height: 1, alignment: .top)
+                                .frame(height: isSkippingHour ? 3 : 1, alignment: .top)
                                 .frame(height: options.entryHeight, alignment: .top)
                         }
                     }
@@ -222,4 +225,54 @@ extension WeekScheduleView where EntryView == WeekScheduleEntryView<Entry> {
             endComponents: DateComponents(hour: 00, minute: 5, weekday: 2)
         )
     ], options: WeekScheduleOptions())
+}
+#Preview {
+    WeekScheduleView(entries: [
+        TimeTableEvent(
+            title: "المترجمات",
+            subtitle: "2157",
+            color: .green,
+            startComponents: DateComponents(hour: 8+0, minute: 25, weekday: 1),
+            endComponents: DateComponents(hour: 9+0, minute: 15, weekday: 1)
+        ),
+        TimeTableEvent(
+            title: "المترجمات",
+            subtitle: "2157",
+            color: .green,
+            startComponents: DateComponents(hour: 9+0, minute: 20, weekday: 1),
+            endComponents: DateComponents(hour: 10+0, minute: 10, weekday: 1)
+        ),
+        TimeTableEvent(
+            title: "أمن المعلومات",
+            subtitle: "3040",
+            color: .red,
+            startComponents: DateComponents(hour: 10+0, minute: 15, weekday: 1),
+            endComponents: DateComponents(hour: 11+0, minute: 5, weekday: 1)
+        ),
+        TimeTableEvent(
+            title: "أمن المعلومات",
+            subtitle: "3040",
+            color: .red,
+            startComponents: DateComponents(hour: 11+0, minute: 10, weekday: 1),
+            endComponents: DateComponents(hour: 12+0, minute: 0, weekday: 1)
+        ),
+        TimeTableEvent(
+            title: "مبادئ قواعد البيانات",
+            subtitle: "2029",
+            color: .blue,
+            startComponents: DateComponents(hour: 14+0, minute: 25, weekday: 1),
+            endComponents: DateComponents(hour: 15+0, minute: 15, weekday: 1)
+        ),
+        TimeTableEvent(
+            title: "مبادئ قواعد البيانات",
+            subtitle: "2029",
+            color: .blue,
+            startComponents: DateComponents(hour: 15+0, minute: 20, weekday: 1),
+            endComponents: DateComponents(hour: 16+0, minute: 10, weekday: 1)
+        )
+    ], options: WeekScheduleOptions())
+    .timelineIndicator(.red)
+    .isEntryTimeShowing(true)
+    .isEntryExpanded(true)
+    .entryHeight(50, 90)
 }
