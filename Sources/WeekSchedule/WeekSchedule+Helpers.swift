@@ -9,13 +9,13 @@ import SwiftUI
  
 extension WeekScheduleView {
     
-    var scheduleHeight: CGFloat {
+    public var scheduleHeight: CGFloat {
         return CGFloat(dayHoursInt.count + 1) * options.entryHeight
     }
     
     // MARK: Timeline Hours Logic
 
-    var entriesHours : Set<Int> {
+    public var entriesHours : Set<Int> {
         var hourAdded : Set<Int> = []
         
         for entry in entries {
@@ -32,10 +32,10 @@ extension WeekScheduleView {
         return hourAdded
     }
     
-    var minHour: Int { return entriesHours.min() ?? 0}
-    var maxHour: Int { return entriesHours.max() ?? 0}
+    public var minHour: Int { return entriesHours.min() ?? 0}
+    public var maxHour: Int { return entriesHours.max() ?? 0}
     
-    var dayHoursInt: [Int] {
+    public var dayHoursInt: [Int] {
         var lowerBound: Int = 0
         var upperBound: Int = 0
         
@@ -60,7 +60,7 @@ extension WeekScheduleView {
         return hoursInt
     }
     
-    var dayHoursDate: [Date] {
+    public var dayHoursDate: [Date] {
         let startOfDay = Date.now.startOfDay
         
         var lowerBound: Int = 0
@@ -91,7 +91,7 @@ extension WeekScheduleView {
         return hoursDate.sorted()
     }
     
-    var currentTimeLineY: CGFloat {
+    public var currentTimeLineY: CGFloat {
         let nowHourMinute = Calendar.current.dateComponents([.hour, .minute], from: .now)
         let hour = nowHourMinute.hour ?? 0
         let minute = nowHourMinute.minute ?? 0
@@ -121,7 +121,7 @@ extension WeekScheduleView {
     // MARK: Entry Logic
     // The position of the entry will be based on the index in entriesHours if certain variable is true
     
-    func getEntriesFor(day: Weekday) -> [Entry] {
+    public func getEntriesFor(day: Weekday) -> [Entry] {
         var dayEntries: [Entry] = []
         let dayHoursInt = Set(dayHoursInt) // For fast lookup
         for entry in entries {
@@ -133,7 +133,7 @@ extension WeekScheduleView {
         return dayEntries
     }
     
-    func entryYPosition(_ entry: Entry) -> CGFloat {
+    public func entryYPosition(_ entry: Entry) -> CGFloat {
         let minuteHeight = options.entryHeight / 60
         var entryYPosition: CGFloat = 0
         
