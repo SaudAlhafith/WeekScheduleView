@@ -42,10 +42,14 @@ public extension WeekScheduleView {
         return view
     }
     
-    func timelineIndicator(_ color: Color) -> WeekScheduleView {
+    func timelineIndicator(_ color: Color? = nil) -> WeekScheduleView {
         var view = self
-        view.options.timelineIndicatorShowing = true
-        view.options.timelineIndicatorColor = color
+        if let color {
+            view.options.timelineIndicatorShowing = true
+            view.options.timelineIndicatorColor = color
+        } else {
+            view.options.timelineIndicatorShowing = false
+        }
         return view
     }
     
