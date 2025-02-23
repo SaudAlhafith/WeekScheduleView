@@ -39,6 +39,10 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
                     Text(subtitle)
                         .font(.system(size: 10))
                 }
+                if let description = entry.description {
+                    Text(description)
+                        .font(.system(size: 9))
+                }
             }
             .frame(maxHeight: .infinity)
             if options.isEntryTimeShowing { 

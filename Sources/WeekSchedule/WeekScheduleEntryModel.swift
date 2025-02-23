@@ -12,6 +12,7 @@ import SwiftUI
 public protocol WeekScheduleEntry: Identifiable {
     var title: String { get }
     var subtitle: String? { get }
+    var description: String? { get }
     var color: Color { get }
     var startComponents: DateComponents { get }
     var endComponents: DateComponents { get }
@@ -19,6 +20,10 @@ public protocol WeekScheduleEntry: Identifiable {
 
 // MARK: - Default Implementation
 public extension WeekScheduleEntry {
+    
+    var description: String? {
+        return nil
+    }
     
     var startDate: Date {
         startComponents.dateForWeek(weekStart: Date.startOfCurrentWeek)
@@ -47,6 +52,7 @@ public extension WeekScheduleEntry {
 
 // MARK: - Default Struct
 public struct TimeTableEvent: WeekScheduleEntry {
+    
     public var id: UUID = UUID()
     public var title: String
     public var subtitle: String?
