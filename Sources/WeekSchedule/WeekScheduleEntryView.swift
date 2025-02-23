@@ -41,7 +41,7 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
                 }
                 if let description = entry.description {
                     Text(description)
-                        .font(.system(size: 9))
+                        .font(.system(size: 8))
                 }
             }
             .frame(maxHeight: .infinity)
