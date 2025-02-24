@@ -176,9 +176,10 @@ public struct WeekScheduleView<EntryView: View, Entry: WeekScheduleEntry>: View 
     
     @ViewBuilder func dayColumn(_ day: Weekday) -> some View {
         VStack(spacing: 0) {
+            let isHighlighted = (day.isToday && options.highlightIntensity != 0)
             Text(day.name(style: options.dayStyle))
-                .font(day.isToday ? options.currentDayFont : options.dayFont)
-                .foregroundColor(day.isToday ? .primary : .gray)
+                .font(isHighlighted ? options.currentDayFont : options.dayFont)
+                .foregroundColor(isHighlighted ? .primary : .gray)
                 .lineLimit(1)
                 .frame(height: 20, alignment: .top)
             ZStack(alignment: .top){
@@ -295,7 +296,7 @@ extension WeekScheduleView where EntryView == WeekScheduleEntryView<Entry> {
             subtitle: "2029",
             color: .blue,
             startComponents: DateComponents(hour: 15+0, minute: 20, weekday: 2),
-            endComponents: DateComponents(hour: 16+0, minute: 10, weekday: 2)
+            endComponents: DateComponents(hour: 16+01, minute: 0, weekday: 2)
         ),
     ], options: WeekScheduleOptions())
     .timelineIndicator(.red)
@@ -303,4 +304,8 @@ extension WeekScheduleView where EntryView == WeekScheduleEntryView<Entry> {
     .isEntryExpanded(true)
     .entryHeight(50, 90)
     .currentDayIntensity(1.0)
+        .padding([.top, .horizontal], 6)
+        .frame(maxHeight: .infinity)
+        .background(.gray.opacity(0.1), in: .rect(cornerRadius: 15))
+        .fixedSize()
 }
