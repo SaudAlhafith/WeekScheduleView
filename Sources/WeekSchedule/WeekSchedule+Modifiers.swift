@@ -16,19 +16,28 @@ public extension WeekScheduleView {
         return view
     }
     
+    /// Set current day appearance
+    func currentDayIntensity(
+        _ intensity: Double = 1.0,
+        currentDayFont: Font = .system(size: 12, weight: .bold)
+    ) -> WeekScheduleView {
+        var view = self
+        view.options.highlightIntensity = intensity
+        view.options.currentDayFont = currentDayFont
+        return view
+    }
+    
     /// Sets the day range to display in the schedule, adjust spacing between days, and customize the day font.
     func scheduleDays(
         _ dayRange: DayRange,
         daySpacing: CGFloat = 4,
         dayFont: Font = .system(size: 10),
-        currentDayFont: Font = .system(size: 12, weight: .bold),
         dayStyle: Weekday.Style = .wide
     ) -> WeekScheduleView {
         var view = self
         view.options.dayRange = dayRange
         view.options.daySpacing = daySpacing
         view.options.dayFont = dayFont
-        view.options.currentDayFont = currentDayFont
         view.options.dayStyle = dayStyle
         return view
     }

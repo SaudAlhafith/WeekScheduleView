@@ -60,9 +60,16 @@ public struct WeekScheduleEntryView<Entry: WeekScheduleEntry>: View {
             RoundedRectangle(cornerRadius: 5)
                 .strokeBorder(entry.color, lineWidth: 2)
         )
-        .brightness(isToday ? 0.1 : -0.1)
-        .saturation(isToday ? 1.3 : 1.0)
-        .opacity(isToday ? 1.0 : 0.8)
+        .brightness(
+            isToday
+            ? (0.1 * (options.highlightIntensity * 0.5))
+            : (options.highlightIntensity * -0.1)
+        )
+        .saturation(
+            isToday
+            ? (1.0 + options.highlightIntensity)
+            : (1.0 - (options.highlightIntensity * 0.5))
+        )
     }
     
 }
