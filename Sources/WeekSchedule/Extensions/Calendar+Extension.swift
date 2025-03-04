@@ -13,6 +13,8 @@ public extension Calendar {
         var weekendDays = Set<Weekday>()
         
         for weekday in Weekday.allCases {
+            guard weekday != .none else { continue }
+            
             var components = DateComponents()
             components.weekday = weekday.rawValue // Adjust for Calendar's 1-based index.
             
