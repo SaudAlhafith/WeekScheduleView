@@ -33,7 +33,7 @@ public extension WeekScheduleEntry {
         endComponents.dateForWeek(weekStart: Date.startOfCurrentWeek)
     }
     var startDay: Weekday { Weekday(rawValue: startComponents.weekday ?? 8) ?? .none }
-    var endDay: Weekday { Weekday(rawValue: startComponents.weekday ?? 8) ?? .none }
+    var endDay: Weekday { Weekday(rawValue: endComponents.weekday ?? 8) ?? .none }
     var startHour: Int { startDate.hour }
     var startMinute: Int { startDate.minute }
     var endHour: Int { endDate.hour }
