@@ -36,7 +36,10 @@ public enum DayRange {
     func resolvedDays() -> [Weekday] {
         switch self {
         case .allDays:
-            return Weekday.allCases
+            let firstWeekday = Calendar.current.firstWeekday
+            return (firstWeekday...(firstWeekday+7)).compactMap {
+                return Weekday(rawValue: ($0 + 7) % 7) // To get local order
+            }
             
         case .weekdays:
             return Weekday.weekdaysForCurrentLocale
@@ -61,8 +64,7 @@ public enum Weekday: Int, CaseIterable {
     /// Returns the correct weekday index based on the current calendar and locale.
     var calendarIndex: Int {
         let calendar = Calendar.current
-        let firstWeekday = calendar.firstWeekday
-        return ((self.rawValue - firstWeekday) + 7) % 7 // to ensure we have positive reminder
+        return ((self.rawValue - 1) + 7) % 7
     }
     
     /// Returns whether the weekday is today.
