@@ -102,7 +102,7 @@ public enum Weekday: Int, CaseIterable {
 
         let weekendDays = calendar.weekendDays
         
-        let weekDays = Weekday.allCases.filter { !weekendDays.contains($0) }
+        let weekDays = Weekday.allCases.filter { !weekendDays.contains($0) && $0 != .none }
         return weekDays
     }
     
