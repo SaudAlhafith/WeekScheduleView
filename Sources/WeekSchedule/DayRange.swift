@@ -62,7 +62,7 @@ public enum Weekday: Int, CaseIterable {
     var calendarIndex: Int {
         let calendar = Calendar.current
         let firstWeekday = calendar.firstWeekday
-        return (self.rawValue - firstWeekday) % 7
+        return ((self.rawValue - firstWeekday) + 7) % 7 // to ensure we have positive reminder
     }
     
     /// Returns whether the weekday is today.
@@ -79,7 +79,10 @@ public enum Weekday: Int, CaseIterable {
     
     /// Returns the localized name of the weekday based on the given format style.
     func name(style: Style = .wide) -> String {
-        let symbols = DateFormatter.weekdayFormatter.weekdaySymbols ?? []
+        guard let symbols = DateFormatter.weekdayFormatter.weekdaySymbols else {
+            return "N/A"
+        }
+
         let name = symbols[calendarIndex]
                 
         switch style {
