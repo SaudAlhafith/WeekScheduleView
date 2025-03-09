@@ -62,13 +62,13 @@ public enum Weekday: Int, CaseIterable {
     case none
     
     /// Returns the correct weekday index based on the current calendar and locale.
-    var calendarIndex: Int {
+    public var calendarIndex: Int {
         let calendar = Calendar.current
         return ((self.rawValue - 1) + 7) % 7
     }
     
     /// Returns whether the weekday is today.
-    var isToday: Bool {
+    public var isToday: Bool {
         let today = Calendar.current.component(.weekday, from: Date())
         return self.rawValue == today
     }
@@ -80,7 +80,7 @@ public enum Weekday: Int, CaseIterable {
     }
     
     /// Returns the localized name of the weekday based on the given format style.
-    func name(style: Style = .wide) -> String {
+    public func name(style: Style = .wide) -> String {
         guard let symbols = DateFormatter.weekdayFormatter.weekdaySymbols else {
             return "N/A"
         }
@@ -97,7 +97,7 @@ public enum Weekday: Int, CaseIterable {
         }
     }
     
-    static var weekdaysForCurrentLocale: [Weekday] {
+    public static var weekdaysForCurrentLocale: [Weekday] {
         let calendar = Calendar.current
 
         let weekendDays = calendar.weekendDays
@@ -106,7 +106,7 @@ public enum Weekday: Int, CaseIterable {
         return weekDays
     }
     
-    static var weekendForCurrentLocale: [Weekday] {
+    public static var weekendForCurrentLocale: [Weekday] {
         return Array(Calendar.current.weekendDays)
     }
     
