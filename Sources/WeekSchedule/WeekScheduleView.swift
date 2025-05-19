@@ -257,34 +257,6 @@ extension WeekScheduleView where EntryView == WeekScheduleEntryView<Entry> {
             endComponents: DateComponents(hour: 16+0, minute: 10, weekday: 1)
         ),
         TimeTableEvent(
-            title: "المترجمات",
-            subtitle: "2157",
-            color: .green,
-            startComponents: DateComponents(hour: 8+0, minute: 25, weekday: 2),
-            endComponents: DateComponents(hour: 9+0, minute: 15, weekday: 2)
-        ),
-        TimeTableEvent(
-            title: "المترجمات",
-            subtitle: "2157",
-            color: .green,
-            startComponents: DateComponents(hour: 9+0, minute: 20, weekday: 2),
-            endComponents: DateComponents(hour: 10+0, minute: 10, weekday: 2)
-        ),
-        TimeTableEvent(
-            title: "أمن المعلومات",
-            subtitle: "3040",
-            color: .red,
-            startComponents: DateComponents(hour: 10+0, minute: 15, weekday: 2),
-            endComponents: DateComponents(hour: 11+0, minute: 5, weekday: 2)
-        ),
-        TimeTableEvent(
-            title: "أمن المعلومات",
-            subtitle: "3040",
-            color: .red,
-            startComponents: DateComponents(hour: 11+0, minute: 10, weekday: 2),
-            endComponents: DateComponents(hour: 12+0, minute: 0, weekday: 2)
-        ),
-        TimeTableEvent(
             title: "مبادئ قواعد البيانات",
             subtitle: "2029",
             color: .blue,

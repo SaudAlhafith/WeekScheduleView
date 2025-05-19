@@ -19,6 +19,7 @@ extension WeekScheduleView {
         var hourAdded : Set<Int> = []
         
         for entry in entries {
+            guard options.dayRange.contains(entry) else { continue }
             var endHour = entry.endHour == 0 ? 24 : entry.endHour
             if entry.endMinute == 0 && endHour - 1 >= entry.startHour {
                 endHour -= 1

@@ -22,13 +22,13 @@ struct ContentView: View {
             }
             WeekScheduleView(entries: example) { entry, day, options in
                 let entryHeight = entry.entryHeight(entryHeight: options.entryHeight)
-//                let isToday = day.isToday
+                let isToday = day.isToday
                     VStack(spacing: 0){
                         if options.isEntryTimeShowing {
                             Text(entry.startDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
                                 .font(.system(size: 9))
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                            
+                                .transition(.opacity.animation(.snappy.delay(0.2)))
                         }
                         VStack {
                             Text(entry.title)
@@ -47,6 +47,7 @@ struct ContentView: View {
                             Text(entry.endDate.formatted(.dateTime.hour(.defaultDigits(amPM: .abbreviated)).minute()))
                                 .font(.system(size: 9))
                                 .frame(maxWidth: .infinity, alignment: .trailing)
+                                .transition(.opacity.animation(.snappy.delay(0.2)))
                         }
                     }
                     .padding(2)
@@ -59,12 +60,12 @@ struct ContentView: View {
                             .strokeBorder(entry.color, lineWidth: 2)
                     )
                     .brightness(
-                        true
+                        isToday
                         ? (0.1 * (options.highlightIntensity * 0.5))
                         : (options.highlightIntensity * -0.1)
                     )
                     .saturation(
-                        true
+                        isToday
                         ? (1.0 + options.highlightIntensity)
                         : (1.0 - (options.highlightIntensity * 0.5))
                     )

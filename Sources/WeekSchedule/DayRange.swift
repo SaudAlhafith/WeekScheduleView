@@ -33,6 +33,23 @@ public enum DayRange {
         }
     }
     
+    func contains<Entry: WeekScheduleEntry>(_ entry: Entry) -> Bool {
+        switch self {
+        case .allDays:
+            return true
+            
+        case .weekdays:
+            let startDayIncluded = Weekday.weekdaysForCurrentLocale.contains(entry.startDay)
+            let endDayIncluded = Weekday.weekdaysForCurrentLocale.contains(entry.endDay)
+            return startDayIncluded || endDayIncluded
+            
+        case .custom(let days):
+            let startDayIncluded = days.contains(entry.startDay)
+            let endDayIncluded = days.contains(entry.endDay)
+            return startDayIncluded || endDayIncluded
+        }
+    }
+    
     func resolvedDays() -> [Weekday] {
         switch self {
         case .allDays:
